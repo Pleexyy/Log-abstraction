@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.mainWindow">
+   <children>
+      <Label layoutX="221.0" layoutY="40.0" text="Log abstraction">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnconfirm" layoutX="423.0" layoutY="105.0" mnemonicParsing="false" text="confirmer" />
+      <TextField fx:id="tflink" layoutX="124.0" layoutY="106.0" prefHeight="24.0" prefWidth="290.0" promptText="Saisissez une adresse web..." />
+      <Pane layoutX="81.0" layoutY="176.0" prefHeight="181.0" prefWidth="444.0">
+         <children>
+            <Label layoutX="104.0" layoutY="112.0" prefHeight="16.0" prefWidth="266.0" text="Glissez-déposez pour uploader un fichier" />
+            <Rectangle fx:id="droparea" arcHeight="5.0" arcWidth="5.0" fill="#58606800" height="201.0" layoutX="-16.0" layoutY="-10.0" stroke="GREY" strokeType="INSIDE" width="473.0" />
+            <ImageView fitHeight="74.0" fitWidth="70.0" layoutX="189.0" layoutY="26.0">
+               <image>
+                  <Image url="@../img/upload.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="189.0" layoutY="136.0" text="ou" />
+            <Button fx:id="btnbrowse" layoutX="206.0" layoutY="132.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="78.0" text="parcourir" />
+         </children></Pane>
+      <Label layoutX="571.0" layoutY="384.0" text="v1.0" />
+   </children>
+</Pane>

@@ -1,0 +1,31 @@
+#btnconfirm {
+  -fx-border: none;
+  -fx-background-color: #2196F3;
+  -fx-cursor: pointer;
+  -fx-display: inline-block;
+  -fx-text-fill: #2196F3;
+  -fx-text-fill: white;
+}
+
+#button:hover {
+  -fx-background-color: #2196F3;
+  -fx-text-fill: white;
+}
+
+#circle {
+    -fx-background-color: black;
+    -fx-background-radius: 2em;
+}
+
+#btnbrowse {
+  -fx-border: none;
+  -fx-background-color: inherit;
+  -fx-cursor: pointer;
+  -fx-display: inline-block;
+  -fx-text-fill: #2196F3;
+}
+
+#btnbrowse:hover {
+  -fx-background-color: #2196F3;
+  -fx-text-fill: white;
+}
