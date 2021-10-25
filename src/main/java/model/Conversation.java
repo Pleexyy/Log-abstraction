@@ -73,29 +73,7 @@ public class Conversation{
       for(ArrayList<String> choisi : conversation.choosedKeys) {
     	  choosedKeys.add(choisi);
       }
-      
-      for(String param : reqorrep.getParamsWithoutFromTo()) {
-    	  if (!assignments.contains(param)) {
-    		  assignments.add(param);
-    	  }
-      }
-      if (reqorrep.isReq()) {
-    	  nbRequest=conversation.getReq()+1;
-    	  nbResponse=conversation.getRep();
-      }
-      else { if (reqorrep.isResp()) {
-    	  nbRequest=conversation.getReq();
-    	  nbResponse=conversation.getRep()+1;
-      }
-      else {
-    	  nbRequest=conversation.getReq();
-    	  nbResponse=conversation.getRep();
-      }
-      }
-      cle=nouvellescles;
-      choosedKeys.add(nouvellescles);
-      
-      conv.add(reqorrep);
+
   }
 
   public Conversation(Event event){
@@ -112,12 +90,6 @@ public class Conversation{
     nbResponse=0;
     cle=new ArrayList<String>();
     conv.add(event);
-    if (event.isReq()) {
-		nbRequest++;
-	}
-    if (event.isResp()){
-		nbResponse++;
-	}
    
   }
 
@@ -125,16 +97,8 @@ public class Conversation{
   public int size() {
       return this.conv.size();
   }
-  public void NouvelEvent(Event evenement ) {
+  public void nouvelEvent(Event evenement ) {
     this.conv.add(evenement);
-    
-    if (evenement.isReq()) {
-    	
-    	this.nbRequest+=1;
-    }
-    else {
-    	this.nbResponse+=1;
-    }
   }
 
   public void setconv(Conversation conv2) {

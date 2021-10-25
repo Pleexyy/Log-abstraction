@@ -23,7 +23,7 @@ public class LogParser {
         Conversation conv  = new Conversation();
         var split = line.split("\\);");
         for (String strEvent : split) {
-            conv.NouvelEvent(new Event(strEvent.strip()+')'));
+            conv.nouvelEvent(new Event(strEvent.strip()+')'));
         }
         return conv;
     }

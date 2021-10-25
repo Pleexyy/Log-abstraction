@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author Blot Elliott
@@ -10,31 +11,26 @@ import java.util.regex.Matcher;
 
 
 /*
-* Represent an event
-*
-* @param  ligne  all the event
-* @param  from  get from where the event came
-* @param  to  get where the event was going to
-* @param  session  get the parameters from the session
-* @param  label  get the label from the event
-* @param  separator  get the separator of the event
-* @param  params  represent all the parameters
-* @param  paramsSess  represent all the parameters useful in order to use the event
-* @param  date  represent the timestamp of the event
-*/
+ * Represent an event
+ *
+ * @param  ligne  all the event
+ * @param  from  get from where the event came
+ * @param  to  get where the event was going to
+ * @param  session  get the parameters from the session
+ * @param  label  get the label from the event
+ * @param  separator  get the separator of the event
+ * @param  params  represent all the parameters
+ * @param  paramsSess  represent all the parameters useful in order to use the event
+ * @param  date  represent the timestamp of the event
+ */
 
 
 public class Event {
 	public String ligne;
-	public static String from = "Host";
-	public static String to = "Dest";
 
-	private String session;
-	
 	private String label;
 	private ArrayList<String> params;
 	private ArrayList<String> paramsSess;
-	public String date;  //public for debug only
 
 	public Event(String line){
 		this.ligne = line;
@@ -42,39 +38,11 @@ public class Event {
 		params = SeparationWhenNoRegex.separationWithoutRegex(line);
 		paramsSess = new ArrayList<String>();
 	}
-	
 
-	public Event(String line, Matcher m) {
-		ligne= line;
-		date = m.group("date");
-		label = m.group("label");
-		params = new ArrayList<String>();
-		paramsSess = new ArrayList<String>();
-		int n = 1;
-		try {
-			while(m.group("param" + n) != null) {
-				
-				if (m.group("param" + n).contains("session=")) {
-					//System.out.println(m.group("param" + n));
-					session = m.group("param" + n);
-				}
-				else {
-					params.add(m.group("param" + n));
-					
-				}
-				if((!m.group("param" + n) .contains("Host=")) && (!m.group("param" + n) .contains("Dest="))){
-					paramsSess.add(m.group("param" + n)); 
-				}
-				n++;
-			
-			}
-		}catch(IllegalArgumentException e) {
-			//end of while
-			System.out.println(e);
-		}
-		
+	public Event() {
+
 	}
-	
+
 	/**
 	 * Return the label of the event.
 	 */
@@ -88,49 +56,19 @@ public class Event {
 	public ArrayList<String> getParamsWithoutFromTo() {
 		return paramsSess;
 	}
-	
+
 	/**
 	 * Return all the parameters.
 	 */
 	public ArrayList<String> getParams() {
 		return params;
 	}
-	
-	/**
-	 * Return the source of the event.
-	 */
-	public String getFrom() {
-		String res = "";
-		for (String param:params) {
-			if (param.startsWith(from + "=")){
-				return param.substring(from.length() + 1);
-			}
-		}
-		System.err.println("no From in :" + this.toString());
-		System.exit(3);
-		return res;
-	}
-
-	/**
-	 * Return the destination of the event.
-	 */
-	public String  getTo() {
-		String res = "";
-		for (String param:params) {
-			if (param.startsWith(to + "=")){
-				return param.substring(to.length() + 1);
-			}
-		}
-		System.err.println("no From in :" + this.toString());
-		System.exit(3);
-		return res;
-	}
 
 	public String getligne() {
 		return this.ligne;
 	}
 
-	
+
 	public String toString() {
 		String res = label + "(";
 		//res = res + "date=" + date + ";";//for debug only
@@ -142,64 +80,69 @@ public class Event {
 		res = res +")";
 		return res;
 	}
-
 	/**
-	 * Check if ai has common parameters with this.
+	 * Return parameters for each parameter
+	 *
+	 * @return String
 	 */
-	public boolean dataSimilarity(Event ai) {
-		ArrayList<String> paramsi = ai.getParams();
-		ArrayList<String> paramsj = this.getParams();
-		for (String parami: paramsi) {
-			if (!(parami.contains(from) || parami.contains(to))) {
-				for (String paramj: paramsj) {
-					if (paramj.equals(parami)) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
+	public String getParameters(String params) {
+		// on divise notre chaine de caractères en tableau
+		String[] parts = params.split("\\=");
+
+		// on récupère notre premier tableau -> ce qui precede le "=" -> le paramètre
+		String beforeEqual = parts[0];
+
+		return beforeEqual;
 	}
 
 	/**
-	 * Check if the event is a request.
+	 * Return typed assignments for each parameter
+	 *
+	 * @return String
 	 */
-	public boolean isReq() {
-		if (!this.toString().contains("esponse") & !this.toString().contains("Resp") & !this.toString().contains("resp") & !isInter()) {
-			//System.out.println(this);
-			return true;
+	public String getTypedAssignments(String params) {
+		// on récupère uniquement les assignments des paramètres
+		String assignment = params.substring(params.lastIndexOf("=") + 1);
+
+		// détermine le type de l'assignment
+
+		// expression régulière pour un entier
+		String regexInt = "[+-]?[0-9]+";
+		Pattern patternInteger = Pattern.compile(regexInt);
+		Matcher matcherInteger = patternInteger.matcher(assignment);
+
+		// expression régulière pour un float
+		String regexFloat = "^([+-]?\\d*\\.?\\d*)$";
+		Pattern patternFloat = Pattern.compile(regexFloat);
+		Matcher matcherFloat = patternFloat.matcher(assignment);
+
+		if (matcherInteger.find() && matcherInteger.group().equals(assignment)) {
+			return "int";
 		}
-		else {
-			return false;
+		if (matcherFloat.find() && matcherFloat.group().equals(assignment)) {
+			return "float";
+		} else {
+			return "String";
 		}
 	}
 
 	/**
-	 * Check if the event is a response.
+	 * Return events with types.
+	 *
+	 * @return String
 	 */
-	public boolean isResp() {
-		if (this.toString().contains("esponse") | this.toString().contains("Resp") | this.toString().contains("resp")) {
-			return true;
+	public String getEventWithTypes() {
+		String stringedEvent = "";
+		String parameter;
+		String assignment;
+		// on parcours nos données
+		for (int i = 0; i < getParams().size(); i++) {
+			parameter = getParameters(getParams().get(i));
+			assignment = getTypedAssignments(getParams().get(i));
+			// concatenation de nos paramètres et de nos assignments
+			stringedEvent += parameter.concat("=").concat(assignment).concat(",");
 		}
-		else {
-			return false;
-		}
+		return stringedEvent.substring(0, stringedEvent.length() - 1);
 	}
 
-	/**
-	 * Check if the event is a non-communicating action.
-	 */
-	public boolean isInter() {
-		if (!this.toString().contains("Host=") | !this.toString().contains("Dest=")) {
-			return true;
-		}
-		if (getFrom().equals(getTo())) {
-			//System.out.println(this);
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
 }
-
