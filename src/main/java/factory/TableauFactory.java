@@ -9,14 +9,15 @@ public class TableauFactory {
     public Tableau createTableau(ConversationSet convSet){
         Tableau tab = new Tableau();
         for (Conversation c: convSet.getConversationSet()) {
+            tab.addRow(c.toString());
             for (Event e: c.getConv()) {
                 StringBuilder buff = new StringBuilder();
                 for (String str: e.getParams()) {
                     buff.append(str).append(',');
                 }
-                tab.addColumn(buff.toString());
+                int column = tab.addColumn(buff.toString());
+                tab.setInMatrix(tab.getLastIndexRow(),column,e);
             }
-            tab.addRow(c.toString());
         }
         return tab;
     }

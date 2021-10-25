@@ -26,6 +26,8 @@ public class FabriqueTest extends TestCase {
             Assertions.assertNotNull(conversationSet);
             Tableau tab = new TableauFactory().createTableau(conversationSet);
             System.out.println(tab.toStringFormated());
+            System.out.println("\n\n\n");
+            tab.printDebugMatrix();
             Assertions.assertNotNull(tab);
         } catch (IOException e) {
             e.printStackTrace();

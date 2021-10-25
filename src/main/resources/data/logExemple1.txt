@@ -1,3 +1,3 @@
 e0(verb=GET, idx=3, session=1); e1(response=300, session=1);
-e0(verb=GET, idx=8, session=2); e1(response=300,session=2);
-e0(link=2800,session=3); e1(group=02,session=3);
+e0(verb=GET, idx=3, session=1); e1(response=300, session=1);
+e0(link=2800,session=1); e1(group=02,session=1);
