@@ -64,10 +64,6 @@ public class Event {
 		return params;
 	}
 
-	public String getligne() {
-		return this.ligne;
-	}
-
 
 	public String toString() {
 		String res = label + "(";

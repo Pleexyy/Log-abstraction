@@ -24,14 +24,6 @@ public class Matrix {
         this.width = (height > 0) ? matrix[0].length : 0;
     }
 
-    public Matrix(Event[] vector) {
-        this.matrix = new Event[vector.length][1];
-        this.height = vector.length;
-        this.width = 1;
-        for(int i = 0; i < vector.length; i++)
-            this.matrix[i][0] = vector[i];
-    }
-
     public int height() {
         return height;
     }
@@ -58,28 +50,6 @@ public class Matrix {
             for(int j = 0; j < result.width(); j++)
                 result.set(i, j,
                         (i < height() && j < width()) ? get(i,j) : fill);
-        return result;
-    }
-
-    public Matrix mergeRight(Matrix other) {
-        Matrix result = new Matrix(height(), width() + other.width());
-        for(int i = 0; i < height(); i++) {
-            for(int j = 0; j < width(); j++)
-                result.set(i,j,get(i,j));
-            for(int j = width(), k = 0; j < result.width(); j++, k++ )
-                result.set(i, j, other.get(i,k));
-        }
-        return result;
-    }
-
-    public Matrix mergeDown(Matrix other) {
-        Matrix result = new Matrix(height() + other.height(), width());
-        for(int j = 0; j < width(); j++) {
-            for(int i = 0; i < height(); i++)
-                result.set(i,j,get(i,j));
-            for(int i = height(), k = 0; i < result.height(); i++, k++)
-                result.set(i,j,other.get(k,j));
-        }
         return result;
     }
 
@@ -119,20 +89,6 @@ public class Matrix {
             for(int j = 0; j < width(); j++)
                 result.set(i, j, get(rows[i],j));
         return result;
-    }
-
-    public Matrix subMatrix(int rows, int cols) {
-        return subMatrix(rows,cols,0,0);
-    }
-
-    public Matrix subMatrix(int rows, int cols, int i, int j) {
-        int[] rowsToKeep = new int[rows];
-        int[] colsToKeep = new int[cols];//TODO
-        for(int k = i, l = 0; k < i+rows; k++, l++)
-            rowsToKeep[l] = k;
-        for(int k = j, l = 0; k < j+cols; k++, l++)
-            colsToKeep[l] = k;
-        return keepRows(rowsToKeep).keepCols(colsToKeep);
     }
 
     public String toString() {

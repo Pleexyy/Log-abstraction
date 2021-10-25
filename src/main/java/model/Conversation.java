@@ -57,42 +57,6 @@ public class Conversation{
       cle=new ArrayList<String>();;
   }
 
-  public Conversation(Conversation conversation, ArrayList<String> nouvellescles, Event reqorrep){
-	  conv= new ArrayList<Event>();
-      for (Event ev : conversation.conv) {
-    	  conv.add(ev);
-      }
-      
-      assignments =  new ArrayList<String>();
-      for (String assi : conversation.assignments) {
-    	  assignments.add(assi);
-      }
-      
-
-      choosedKeys= new ArrayList<ArrayList<String>>();
-      for(ArrayList<String> choisi : conversation.choosedKeys) {
-    	  choosedKeys.add(choisi);
-      }
-
-  }
-
-  public Conversation(Event event){
-    conv= new ArrayList<Event>();
-    assignments =  new ArrayList<String>();
-    for(String param : event.getParamsWithoutFromTo()) {
-  	  if (!assignments.contains(param)) {
-  		  assignments.add(param);
-  	  }
-    }
-    choosedKeys=new ArrayList<ArrayList<String>>();
-
-    nbRequest=0;
-    nbResponse=0;
-    cle=new ArrayList<String>();
-    conv.add(event);
-   
-  }
-
   //renvoie la taille de la conversation
   public int size() {
       return this.conv.size();
@@ -101,33 +65,9 @@ public class Conversation{
     this.conv.add(evenement);
   }
 
-  public void setconv(Conversation conv2) {
-		this.conv = conv2.conv;
-	}
-
   //renvoie la conversation
   public ArrayList<Event> getConv(){
      //Collections.unmodifiableList(conv);
 	  return conv;
   }
-
-  //renvoie le dernier evenement d'une conversation
-    public Event getLastEvent(){return this.conv.get(this.conv.size()-1);}
-    public Event getFirstEvent(){return this.conv.get(0);}
-    public ArrayList<ArrayList<String>> getChoosedKeys() {
-	return choosedKeys;
-	}
-    public void addChoosedKeys(ArrayList<String> clechoisi) {
-	this.choosedKeys.add(clechoisi);
-	}
-  
-
-	public int getReq(){
-		return this.nbRequest;
-	}
-	public int getRep(){
-		return this.nbResponse;
-	}
-	
-	
 }
