@@ -1,5 +1,6 @@
 package model;
 
+import java.beans.PropertyEditorManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +40,17 @@ public class Tableau {
             stringBuffer.append(s).append('\t');
         }
         stringBuffer.append('\n');
-        for (String s: labelRow) {
-            stringBuffer.append(s);
+        for (int j = 0 ; j < labelRow.size() ; ++j){
+            stringBuffer.append(labelRow.get(j));
+            for (int i = 0; i < labelColumn.size(); ++i){
+                if (matrix.get(j,i) == null){
+                    stringBuffer.append(" ".repeat(labelColumn.get(i).length()));
+                }else {
+                    String replacement = " ".repeat(labelColumn.get(i).length()/2);
+                    stringBuffer.append(replacement).append(matrix.get(j,i).getLabel()).append(replacement);
+                }
+                stringBuffer.append('\t');
+            }
             stringBuffer.append('\n');
         }
         return stringBuffer.toString();
