@@ -12,7 +12,7 @@ public class SeparationWhenNoRegex {
         final String DEUXIEMESEPARATION = ",";
         String[] parametres = str.split(DEUXIEMESEPARATION);
         for (int i = 0; i < parametres.length; i++) {
-            liste.add(parametres[i]);
+            liste.add(parametres[i].strip());
         }
         return liste;
     }
