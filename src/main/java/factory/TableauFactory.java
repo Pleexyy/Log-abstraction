@@ -15,7 +15,7 @@ public class TableauFactory {
                 for (String str: e.getParams()) {
                     buff.append(str).append(',');
                 }
-                int column = tab.addColumn(buff.toString());
+                int column = tab.addColumn(e.getEventWithTypes());
                 tab.setInMatrix(tab.getLastIndexRow(),column,e);
             }
         }
