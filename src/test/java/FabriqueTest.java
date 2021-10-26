@@ -46,4 +46,19 @@ public class FabriqueTest extends TestCase {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void testFabrique3(){
+        try{
+            var url = getClass().getResource("/data/ConversationSet0.txt");
+            Assertions.assertNotNull(url);
+            ConversationSet convSet = new LogParser().parseFile(new File(url.getFile()));
+            Assertions.assertNotNull(convSet);
+            Tableau tab = TableauFactory.createTableau(convSet);
+            Assertions.assertNotNull(tab);
+            Assertions.assertEquals(875,tab.getLastIndexRow());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

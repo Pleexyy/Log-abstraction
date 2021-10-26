@@ -64,4 +64,24 @@ public class Tableau {
     public void printDebugMatrix() {
         System.out.println(matrix);
     }
+
+    public Matrix getMatrix() {
+        return matrix;
+    }
+
+    public void deleteColumnNb(int nb){
+        labelColumn.remove(nb);
+        matrix = matrix.removeColumnNb(nb);
+    }
+
+    public void deleteColumnName(String str) {
+        int size = labelColumn.size();
+        for(int i = 0; i < size ; ++i){
+            System.out.println(i);
+            if (labelColumn.get(i).equals(str)){
+                deleteColumnNb(i);
+                return;
+            }
+        }
+    }
 }

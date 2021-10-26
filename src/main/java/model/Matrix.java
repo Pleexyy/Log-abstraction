@@ -104,4 +104,17 @@ public class Matrix {
         sb.deleteCharAt(sb.length()-1);
         return sb.toString();
     }
+
+    public Matrix removeColumnNb(int num) {
+        Matrix result = new Matrix(height(),width()-1);
+        for (int i = 0 ; i < height ; ++i){
+            for (int j = 0; j < num ; ++j){
+                result.set(i,j, get(i,j));
+            }
+            for (int j = num+1; j < width; ++j){
+                result.set(i,j-1, get(i,j));
+            }
+        }
+        return result;
+    }
 }
