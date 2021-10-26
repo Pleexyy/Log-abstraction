@@ -1,5 +1,5 @@
-import junit.framework.Assert;
 import model.Event;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ public class TyperTest {
         final String param = "Verb=GET";
         final String expectedParameter = "Verb";
 
-        Assert.assertEquals(event.getParameters(param), expectedParameter);
+        Assertions.assertEquals(event.getParameters(param), expectedParameter);
     }
 
     @Test
@@ -25,7 +25,7 @@ public class TyperTest {
         final String param = "GET";
         final String expectedAssignment = "String";
 
-        Assert.assertEquals(event.getTypedAssignments(param), expectedAssignment);
+        Assertions.assertEquals(event.getTypedAssignments(param), expectedAssignment);
     }
 
     @Test
@@ -33,7 +33,7 @@ public class TyperTest {
         final String param = "5.5";
         final String expectedAssignment = "float";
 
-        Assert.assertEquals(event.getTypedAssignments(param), expectedAssignment);
+        Assertions.assertEquals(event.getTypedAssignments(param), expectedAssignment);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class TyperTest {
         final String param = "10";
         final String expectedAssignment = "int";
 
-        Assert.assertEquals(event.getTypedAssignments(param), expectedAssignment);
+        Assertions.assertEquals(event.getTypedAssignments(param), expectedAssignment);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class TyperTest {
         event = new Event(stringedEvent);
         String eventWithTypes = event.getEventWithTypes();
 
-        Assert.assertEquals(expectedEvent, eventWithTypes);
+        Assertions.assertEquals(expectedEvent, eventWithTypes);
     }
 
 }

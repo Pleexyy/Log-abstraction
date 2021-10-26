@@ -1,8 +1,9 @@
 package model;
 
+import utils.PatternPreCompiled;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author Blot Elliott
@@ -94,23 +95,14 @@ public class Event {
         // détermine le type de l'assignment
 
         // expression régulière pour un entier
-        String regexInt = "[+-]?[0-9]+";
-        Pattern patternInteger = Pattern.compile(regexInt);
-        Matcher matcherInteger = patternInteger.matcher(assignment);
+        Matcher matcherInteger = PatternPreCompiled.patternInteger.matcher(assignment);
 
         // expression régulière pour un float
-        String regexFloat = "^([+-]?\\d*\\.?\\d*)$";
-        Pattern patternFloat = Pattern.compile(regexFloat);
-        Matcher matcherFloat = patternFloat.matcher(assignment);
+        Matcher matcherFloat = PatternPreCompiled.patternFloat.matcher(assignment);
 
-        if (matcherInteger.find() && matcherInteger.group().equals(assignment)) {
+        if (matcherInteger.matches())
             return "int";
-        }
-        if (matcherFloat.find() && matcherFloat.group().equals(assignment)) {
-            return "float";
-        } else {
-            return "String";
-        }
+        return matcherFloat.matches() ? "float" : "String";
     }
 
     /**
