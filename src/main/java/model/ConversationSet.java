@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 
 public class ConversationSet {
-    public ArrayList<Conversation> conversations;
+    private final ArrayList<Conversation> conversations;
 
     public ConversationSet() {
         conversations = new ArrayList<>();
