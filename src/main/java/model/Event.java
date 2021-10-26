@@ -6,9 +6,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author Blot Elliott
- *
  */
-
 
 /*
  * Represent an event
@@ -24,121 +22,113 @@ import java.util.regex.Pattern;
  * @param  date  represent the timestamp of the event
  */
 
-
 public class Event {
-	public String ligne;
+    public String ligne;
 
-	private String label;
-	private ArrayList<String> params;
-	private ArrayList<String> paramsSess;
+    private String label;
+    private ArrayList<String> params;
+    private ArrayList<String> paramsSess;
 
-	public Event(String line){
-		this.ligne = line;
-		label= SeparationWhenNoRegex.nameOfAnEvent(line);
-		params = SeparationWhenNoRegex.separationWithoutRegex(line);
-		paramsSess = new ArrayList<String>();
-	}
+    public Event(String line) {
+        this.ligne = line;
+        label = SeparationWhenNoRegex.nameOfAnEvent(line);
+        params = SeparationWhenNoRegex.separationWithoutRegex(line);
+        paramsSess = new ArrayList<>();
+    }
 
-	public Event() {
+    public Event() {
 
-	}
+    }
 
-	/**
-	 * Return the label of the event.
-	 */
-	public String getLabel() {
-		return label;
-	}
+    /**
+     * Return the label of the event.
+     */
+    public String getLabel() {
+        return label;
+    }
 
-	/**
-	 * Return the parameters of the event, without session identifier.
-	 */
-	public ArrayList<String> getParamsWithoutFromTo() {
-		return paramsSess;
-	}
+    /**
+     * Return all the parameters.
+     */
+    public ArrayList<String> getParams() {
+        return params;
+    }
 
-	/**
-	 * Return all the parameters.
-	 */
-	public ArrayList<String> getParams() {
-		return params;
-	}
+    public String toString() {
+        String res = label + "(";
+        String separator = ",";
+        for (String param : params) {
+            res = res + param + separator;
+        }
+        res = res.substring(0, res.length() - separator.length());
+        res = res + ")";
+        return res;
+    }
 
+    /**
+     * Return parameters for each parameter
+     *
+     * @param params
+     * @return String
+     */
+    public String getParameters(String params) {
+        // on divise notre chaine de caractères en tableau
+        String[] parts = params.split("\\=");
 
-	public String toString() {
-		String res = label + "(";
-		//res = res + "date=" + date + ";";//for debug only
-		String separator = ",";
-		for (String param: params) {
-			res = res + param + separator;
-		}
-		res = res.substring(0, res.length()- separator.length());
-		res = res +")";
-		return res;
-	}
-	/**
-	 * Return parameters for each parameter
-	 *
-	 * @return String
-	 */
-	public String getParameters(String params) {
-		// on divise notre chaine de caractères en tableau
-		String[] parts = params.split("\\=");
+        // on récupère notre premier tableau -> ce qui precede le "=" -> le paramètre
+        String beforeEqual = parts[0];
 
-		// on récupère notre premier tableau -> ce qui precede le "=" -> le paramètre
-		String beforeEqual = parts[0];
+        return beforeEqual;
+    }
 
-		return beforeEqual;
-	}
+    /**
+     * Return typed assignments for each parameter
+     *
+     * @param params
+     * @return String
+     */
+    public String getTypedAssignments(String params) {
+        // on récupère uniquement les assignments des paramètres
+        String assignment = params.substring(params.lastIndexOf("=") + 1);
 
-	/**
-	 * Return typed assignments for each parameter
-	 *
-	 * @return String
-	 */
-	public String getTypedAssignments(String params) {
-		// on récupère uniquement les assignments des paramètres
-		String assignment = params.substring(params.lastIndexOf("=") + 1);
+        // détermine le type de l'assignment
 
-		// détermine le type de l'assignment
+        // expression régulière pour un entier
+        String regexInt = "[+-]?[0-9]+";
+        Pattern patternInteger = Pattern.compile(regexInt);
+        Matcher matcherInteger = patternInteger.matcher(assignment);
 
-		// expression régulière pour un entier
-		String regexInt = "[+-]?[0-9]+";
-		Pattern patternInteger = Pattern.compile(regexInt);
-		Matcher matcherInteger = patternInteger.matcher(assignment);
+        // expression régulière pour un float
+        String regexFloat = "^([+-]?\\d*\\.?\\d*)$";
+        Pattern patternFloat = Pattern.compile(regexFloat);
+        Matcher matcherFloat = patternFloat.matcher(assignment);
 
-		// expression régulière pour un float
-		String regexFloat = "^([+-]?\\d*\\.?\\d*)$";
-		Pattern patternFloat = Pattern.compile(regexFloat);
-		Matcher matcherFloat = patternFloat.matcher(assignment);
+        if (matcherInteger.find() && matcherInteger.group().equals(assignment)) {
+            return "int";
+        }
+        if (matcherFloat.find() && matcherFloat.group().equals(assignment)) {
+            return "float";
+        } else {
+            return "String";
+        }
+    }
 
-		if (matcherInteger.find() && matcherInteger.group().equals(assignment)) {
-			return "int";
-		}
-		if (matcherFloat.find() && matcherFloat.group().equals(assignment)) {
-			return "float";
-		} else {
-			return "String";
-		}
-	}
-
-	/**
-	 * Return events with types.
-	 *
-	 * @return String
-	 */
-	public String getEventWithTypes() {
-		String stringedEvent = "";
-		String parameter;
-		String assignment;
-		// on parcours nos données
-		for (int i = 0; i < getParams().size(); i++) {
-			parameter = getParameters(getParams().get(i));
-			assignment = getTypedAssignments(getParams().get(i));
-			// concatenation de nos paramètres et de nos assignments
-			stringedEvent += parameter.concat("=").concat(assignment).concat(",");
-		}
-		return stringedEvent.substring(0, stringedEvent.length() - 1);
-	}
+    /**
+     * Return events with types.
+     *
+     * @return String
+     */
+    public String getEventWithTypes() {
+        String stringedEvent = "";
+        String parameter, assignment;
+        // on parcours nos données
+        for (int i = 0; i < this.getParams().size(); i++) {
+            parameter = this.getParameters(this.getParams().get(i));
+            assignment = this.getTypedAssignments(this.getParams().get(i));
+            // concaténation de nos paramètres et de nos assignments
+            stringedEvent += parameter.concat("=").concat(assignment).concat(",");
+        }
+        return stringedEvent.substring(0, stringedEvent.length() - 1);
+    }
 
 }

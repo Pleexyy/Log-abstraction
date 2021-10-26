@@ -13,11 +13,10 @@ public class Prog {
             var res = Prog.class.getResource("/data/log-block.txt");
             if (res != null) {
                 convSet = new LogParser().parseFile(new File(res.getFile()));
-                if (convSet == null){
+                if (convSet == null) {
                     System.err.println("Ça n'a pas fonctionné");
                 }
-            }
-            else{
+            } else {
                 throw new IOException("L'URL de la ressource est null");
             }
             System.out.println(convSet);

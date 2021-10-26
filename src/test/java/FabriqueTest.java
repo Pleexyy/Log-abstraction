@@ -12,7 +12,7 @@ import java.io.IOException;
 public class FabriqueTest extends TestCase {
 
     @Test
-    public void testFabrique(){
+    public void testFabrique() {
         try {
             var url = getClass().getResource("data/logExemple1.txt");
             Assertions.assertNotNull(url);
