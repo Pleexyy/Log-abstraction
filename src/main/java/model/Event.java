@@ -19,22 +19,16 @@ import java.util.regex.Matcher;
  * @param  label  get the label from the event
  * @param  separator  get the separator of the event
  * @param  params  represent all the parameters
- * @param  paramsSess  represent all the parameters useful in order to use the event
- * @param  date  represent the timestamp of the event
  */
 
 public class Event {
-    public String ligne;
-
-    private String label;
+    public String ligne, label;
     private ArrayList<String> params;
-    private ArrayList<String> paramsSess;
 
     public Event(String line) {
         this.ligne = line;
         label = SeparationWhenNoRegex.nameOfAnEvent(line);
         params = SeparationWhenNoRegex.separationWithoutRegex(line);
-        paramsSess = new ArrayList<>();
     }
 
     public Event() {

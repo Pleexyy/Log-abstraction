@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /*
  * Represent a ConversationSet
  *
- * @param  ConvSet  list of conversation
+ * @param  conversation  list of conversation
  */
 
 public class ConversationSet {
@@ -19,10 +19,20 @@ public class ConversationSet {
         conversations.add(c);
     }
 
+    /**
+     * retourne la taille des conversations
+     *
+     * @return la taille de la liste des conversations de type Conversation
+     */
     public int getSize() {
         return this.conversations.size();
     }
 
+    /**
+     * retourne les conversations
+     *
+     * @return la liste des conversations de type Conversation
+     */
     public ArrayList<Conversation> getConversationSet() {
         return this.conversations;
     }

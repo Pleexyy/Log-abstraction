@@ -7,10 +7,7 @@ import java.util.ArrayList;
  * @param  choosedKeys  save the choosed keys for the conversation
  * @param  assignments  save the assignments used for all keys
  * @param  cle  save the last used keys
- * @param  nbrequest  number of requests in the conversation
- * @param  nbreponse  number of responses in the conversation
  */
-
 
 public class Conversation {
     public ArrayList<Event> conv;
@@ -22,29 +19,27 @@ public class Conversation {
 
     public Conversation() {
         conv = new ArrayList<>();
-
         choosedKeys = new ArrayList<>();
-
         assignments = new ArrayList<>();
-
         cle = new ArrayList<>();
     }
 
     public Conversation(Conversation conversation) {
         conv = new ArrayList<>();
-        conv.addAll(conversation.conv);
-
         choosedKeys = new ArrayList<>();
-        choosedKeys.addAll(conversation.choosedKeys);
-
         assignments = new ArrayList<>();
-
-        assignments.addAll(conversation.assignments);
-
         cle = new ArrayList<>();
+
+        conv.addAll(conversation.conv);
+        choosedKeys.addAll(conversation.choosedKeys);
+        assignments.addAll(conversation.assignments);
     }
 
-    //renvoie la taille de la conversation
+    /**
+     * retourne la taille de la conversation
+     *
+     * @return la taille de la liste des conversations de type Event
+     */
     public int size() {
         return this.conv.size();
     }
@@ -53,9 +48,12 @@ public class Conversation {
         this.conv.add(evenement);
     }
 
-    //renvoie la conversation
+    /**
+     * retourne les conversations
+     *
+     * @return la liste des conversations de type Event
+     */
     public ArrayList<Event> getConv() {
-        //Collections.unmodifiableList(conv);
         return conv;
     }
 }
