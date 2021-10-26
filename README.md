@@ -1,6 +1,13 @@
 # Log-abstraction
-Implémentation d'un algorithme d’abstraction de séquences d’évènements de session provenant de log +  implémentation d'un outil de monitoring permettant d’utiliser des logs depuis un test JUnit.
+Implémentation d'un algorithme d’abstraction de séquences d’évènements de session provenant de log.
 
- # Authors
-  * Gabriel Theuws
-  * Thibaud Bonneville
+## Contenu
+* src/ contient le code source.
+* target/ contient les fichiers .class compilés.
+
+## Utilisation
+Vous pouvez compiler le programme en exécutant le script **build.sh**.
+
+## Authors
+  * Gabriel THEUWS
+  * Thibaud BONNEVILLE
