@@ -15,12 +15,12 @@ public class FabriqueTest extends TestCase {
     private TableauFactory tabFact;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         tabFact = new TableauFactory();
     }
 
     @Test
-    public void testFabrique(){
+    public void testFabrique() {
         try {
             ConversationSet conversationSet = new LogParser().parseFile(new File(getClass().getResource("data/logExemple1.txt").getFile()));
             Assertions.assertNotNull(conversationSet);
