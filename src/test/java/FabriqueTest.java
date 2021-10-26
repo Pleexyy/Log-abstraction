@@ -3,7 +3,6 @@ import junit.framework.TestCase;
 import model.ConversationSet;
 import model.Tableau;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import parser.LogParser;
 
@@ -12,24 +11,38 @@ import java.io.IOException;
 
 public class FabriqueTest extends TestCase {
 
-    private TableauFactory tabFact;
-
-    @BeforeEach
-    public void setUp(){
-        tabFact = new TableauFactory();
-    }
-
     @Test
     public void testFabrique(){
         try {
-            ConversationSet conversationSet = new LogParser().parseFile(new File(getClass().getResource("data/logExemple1.txt").getFile()));
+            var url = getClass().getResource("data/logExemple1.txt");
+            Assertions.assertNotNull(url);
+            ConversationSet conversationSet = new LogParser().parseFile(new File(url.getFile()));
             Assertions.assertNotNull(conversationSet);
-            Tableau tab = new TableauFactory().createTableau(conversationSet);
-            System.out.println(tab.toStringFormated());
-            System.out.println("\n");
-            tab.printDebugMatrix();
+            Tableau tab = TableauFactory.createTableau(conversationSet);
             Assertions.assertNotNull(tab);
+            Assertions.assertEquals(2,tab.getLastIndexRow());
+
+            System.out.println(tab.toStringFormated() + '\n');
+            tab.printDebugMatrix();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testFabrique2(){
+        try{
+            var url = getClass().getResource("/data/log-block.txt");
+            Assertions.assertNotNull(url);
+            ConversationSet convSet = new LogParser().parseFile(new File(url.getFile()));
+            Assertions.assertNotNull(convSet);
+            Tableau tab = TableauFactory.createTableau(convSet);
+            Assertions.assertNotNull(tab);
+            Assertions.assertEquals(19,tab.getLastIndexRow());
+
+            System.out.println(tab.toStringFormated() + '\n');
+            tab.printDebugMatrix();
+        }catch(Exception e){
             e.printStackTrace();
         }
     }

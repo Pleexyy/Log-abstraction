@@ -6,7 +6,7 @@ import model.Event;
 import model.Tableau;
 
 public class TableauFactory {
-    public Tableau createTableau(ConversationSet convSet){
+    public static Tableau createTableau(ConversationSet convSet){
         Tableau tab = new Tableau();
         for (Conversation c: convSet.getConversationSet()) {
             tab.addRow(c.toString());
