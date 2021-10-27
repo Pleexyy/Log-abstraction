@@ -30,8 +30,12 @@ public class Tableau {
         return i;
     }
 
-    public int getLastIndexRow() {
+    public int getSizeRows() {
         return labelRow.size() - 1;
+    }
+
+    public int getSizeColumns(){
+        return labelColumn.size() - 1;
     }
 
     public String toStringFormated() {
@@ -83,5 +87,9 @@ public class Tableau {
                 return;
             }
         }
+    }
+
+    public int columnIndexOf(String type) {
+        return labelColumn.indexOf(type);
     }
 }

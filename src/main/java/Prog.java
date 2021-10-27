@@ -1,10 +1,15 @@
 import distance.DistanceEvent;
+import distance.FabriqueMatriceDistance;
+import factory.TableauFactory;
 import model.Conversation;
 import model.ConversationSet;
 import model.Event;
+import model.Tableau;
 import parser.LogParser;
 import smile.clustering.DBSCAN;
 import smile.data.DataFrame;
+import smile.math.matrix.Matrix;
+import smile.plot.swing.Canvas;
 import smile.plot.swing.ScatterPlot;
 
 import java.io.File;
@@ -25,11 +30,15 @@ public class Prog {
                 if (convSet == null) {
                     System.err.println("Ça n'a pas fonctionné");
                 }
-                dbscan(convSet);
+                //dbscan(convSet);
             } else {
                 throw new IOException("L'URL de la ressource est null");
             }
-            System.out.println(convSet);
+            Tableau t = TableauFactory.createTableau(convSet);
+            Matrix m = FabriqueMatriceDistance.createMatrixDistance(t,convSet,4,1,0.8);
+            System.out.println(m);
+            var dbscan = DBSCAN.fit(m.toArray(),2,2);
+            var s = ScatterPlot.of(m.toArray(),dbscan.y,'.');
         } catch (IOException e) {
             e.printStackTrace();
         }

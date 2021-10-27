@@ -20,7 +20,7 @@ public class FabriqueTest extends TestCase {
             Assertions.assertNotNull(conversationSet);
             Tableau tab = TableauFactory.createTableau(conversationSet);
             Assertions.assertNotNull(tab);
-            Assertions.assertEquals(2,tab.getLastIndexRow());
+            Assertions.assertEquals(2,tab.getSizeRows());
 
             System.out.println(tab.toStringFormated() + '\n');
             tab.printDebugMatrix();
@@ -38,7 +38,7 @@ public class FabriqueTest extends TestCase {
             Assertions.assertNotNull(convSet);
             Tableau tab = TableauFactory.createTableau(convSet);
             Assertions.assertNotNull(tab);
-            Assertions.assertEquals(19,tab.getLastIndexRow());
+            Assertions.assertEquals(19,tab.getSizeRows());
 
             System.out.println(tab.toStringFormated() + '\n');
             tab.printDebugMatrix();
@@ -56,7 +56,7 @@ public class FabriqueTest extends TestCase {
             Assertions.assertNotNull(convSet);
             Tableau tab = TableauFactory.createTableau(convSet);
             Assertions.assertNotNull(tab);
-            Assertions.assertEquals(875,tab.getLastIndexRow());
+            Assertions.assertEquals(875,tab.getSizeRows());
         }catch (Exception e){
             e.printStackTrace();
         }
