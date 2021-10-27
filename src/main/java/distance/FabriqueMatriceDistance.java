@@ -21,21 +21,17 @@ public class FabriqueMatriceDistance {
                 for (int j = 1; j <= lookback; j++) {
                     if (i >= j) {
                         Event eventY = conv.getConv().get(i - j);
-                        // on trouve l'emplacement où mettre la valeur
+                        // on trouve l'emplacement où prendre et mettre la valeur
                         int rowIndex = t.columnIndexOf(refEvent.getEventWithTypes());
                         int columnIndex = t.columnIndexOf(eventY.getEventWithTypes());
                         // on obtient la distance
                         double distanceValue = m.get(rowIndex,columnIndex) + incrementValue * Math.pow(facteurAttenuation, j);
                         //on l'affecte
-                        m.set(rowIndex,columnIndex,distanceValue);
+                        m.set(rowIndex,columnIndex,1.0/distanceValue);
                     }
                 }
             }
         }
         return m;
-    }
-
-    private static double getDistanceValue(Event refEvent, Event eventY) {
-        return 0d;
     }
 }
