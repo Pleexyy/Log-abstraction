@@ -47,6 +47,17 @@ public class TableauTest extends TestCase {
     }
 
     @Test
+    public void testAddRow() {
+        System.out.println("before add row");
+        tableau.printDebugMatrix();
+        tableau.addRow("new row");
+        System.out.println("\n\n");
+        System.out.println("after row added");
+        tableau.printDebugMatrix();
+        Assertions.assertNotNull(tableau);
+    }
+
+    @Test
     public void testAddColumn() {
         System.out.println("before add column");
         tableau.printDebugMatrix();
@@ -57,14 +68,4 @@ public class TableauTest extends TestCase {
         Assertions.assertNotNull(tableau);
     }
 
-    @Test
-    public void testAddRow() {
-        System.out.println("before add row");
-        tableau.printDebugMatrix();
-        tableau.addRow("new row");
-        System.out.println("\n\n");
-        System.out.println("after row added");
-        tableau.printDebugMatrix();
-        Assertions.assertNotNull(tableau);
-    }
 }
