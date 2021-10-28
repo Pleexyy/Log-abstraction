@@ -8,7 +8,15 @@ import smile.math.matrix.Matrix;
 
 public class FabriqueMatriceDistance {
 
+    public static Matrix createMatrixDistance(Tableau t, ConversationSet convSet, final int lookback, final double facteurAttenuation){
+        return createMatrixDistance(t,convSet,lookback,1,facteurAttenuation);
+    }
+
     public static Matrix createMatrixDistance(Tableau t, ConversationSet convSet, final int lookback, final int incrementValue, final double facteurAttenuation){
+        if (lookback < 0 || incrementValue < 0)
+            throw new IllegalArgumentException("loopback ou incrementValue est négatif");
+        if (facteurAttenuation <= 0 || facteurAttenuation > 1)
+            throw new IllegalArgumentException("facteurAttenuation doit être compris entre 1 et 0");
         Matrix m;
         {
             int tailleColumn = t.getSizeColumns()+1;
@@ -25,9 +33,16 @@ public class FabriqueMatriceDistance {
                         int rowIndex = t.columnIndexOf(refEvent.getEventWithTypes());
                         int columnIndex = t.columnIndexOf(eventY.getEventWithTypes());
                         // on obtient la distance
-                        double distanceValue = m.get(rowIndex,columnIndex) + incrementValue * Math.pow(facteurAttenuation, j);
+                        double distanceValue = 1.0/m.get(rowIndex,columnIndex) + incrementValue * Math.pow(facteurAttenuation, j);
+
                         //on l'affecte
-                        m.set(rowIndex,columnIndex,1.0/distanceValue);
+                        if (Double.POSITIVE_INFINITY == distanceValue){
+                            m.set(rowIndex,columnIndex,Double.MAX_VALUE);
+                            m.set(columnIndex,rowIndex,Double.MAX_VALUE);
+                        }else{
+                            m.set(rowIndex,columnIndex,distanceValue);
+                            m.set(columnIndex,rowIndex,distanceValue);
+                        }
                     }
                 }
             }
