@@ -11,10 +11,6 @@ public class TableauFactory {
         for (Conversation c: convSet.getConversationSet()) {
             tab.addRow(c.toString());
             for (Event e: c.getConv()) {
-                StringBuilder buff = new StringBuilder();
-                for (String str: e.getParams()) {
-                    buff.append(str).append(',');
-                }
                 int column = tab.addColumn(e.getEventWithTypes());
                 tab.setInMatrix(tab.getSizeRows(),column,e);
             }
