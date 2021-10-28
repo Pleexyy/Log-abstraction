@@ -69,10 +69,6 @@ public class Tableau {
         System.out.println(matrix);
     }
 
-    public Matrix getMatrix() {
-        return matrix;
-    }
-
     public void deleteColumnNb(int nb){
         labelColumn.remove(nb);
         matrix = matrix.removeColumnNb(nb);

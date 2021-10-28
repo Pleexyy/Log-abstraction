@@ -1,23 +1,28 @@
-import model.Event;
 import model.SeparationWhenNoRegex;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class testSeparationWhenNoRegex {
-    private SeparationWhenNoRegex separationWhenNoRegex;
+import java.util.ArrayList;
 
-    @BeforeEach
-    public void init() {
-        separationWhenNoRegex = new SeparationWhenNoRegex();
-    }
+public class testSeparationWhenNoRegex {
 
     @Test
-    public void testSeparationWhenNoRegex() {
+    public void testNameOfAnEvent() {
         final String stringedEvent = "e0(Verb=GET,idx=3)";
         final String expectedLabel = "e0";
 
-        Assertions.assertEquals(expectedLabel, separationWhenNoRegex.nameOfAnEvent(stringedEvent));
+        Assertions.assertEquals(expectedLabel, SeparationWhenNoRegex.nameOfAnEvent(stringedEvent));
+    }
+
+    @Test
+    public void separationWithoutRegex() {
+        final String stringedEvent = "e0(Verb=GET,idx=3)";
+        final ArrayList<String> expectedParam = new ArrayList<>();
+        expectedParam.add("Verb=GET");
+        expectedParam.add("idx=3");
+
+        Assertions.assertEquals(expectedParam.size(), SeparationWhenNoRegex.separationWithoutRegex(stringedEvent).size());
+        Assertions.assertEquals(expectedParam, SeparationWhenNoRegex.separationWithoutRegex(stringedEvent));
     }
 
 }

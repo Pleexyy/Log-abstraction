@@ -4,9 +4,6 @@ import java.util.ArrayList;
 /*
  * represent a conversation
  * @param  conv  save the conversation
- * @param  choosedKeys  save the choosed keys for the conversation
- * @param  assignments  save the assignments used for all keys
- * @param  cle  save the last used keys
  */
 
 public class Conversation {
@@ -14,12 +11,6 @@ public class Conversation {
 
     public Conversation() {
         conv = new ArrayList<>();
-    }
-
-    public Conversation(Conversation conversation) {
-        conv = new ArrayList<>();
-
-        conv.addAll(conversation.conv);
     }
 
     /**

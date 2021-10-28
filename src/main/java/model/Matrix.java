@@ -118,7 +118,4 @@ public class Matrix {
         return result;
     }
 
-    public Event[][] getMatrixTab() {
-        return matrix;
-    }
 }

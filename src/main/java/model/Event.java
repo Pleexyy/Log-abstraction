@@ -13,9 +13,6 @@ import java.util.regex.Matcher;
  * Represent an event
  *
  * @param  ligne  all the event
- * @param  from  get from where the event came
- * @param  to  get where the event was going to
- * @param  session  get the parameters from the session
  * @param  label  get the label from the event
  * @param  separator  get the separator of the event
  * @param  params  represent all the parameters

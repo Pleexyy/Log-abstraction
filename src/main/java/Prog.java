@@ -22,22 +22,14 @@ public class Prog {
                 if (convSet == null) {
                     System.err.println("Ça n'a pas fonctionné");
                 }
-                //dbscan(convSet);
             } else {
                 throw new IOException("L'URL de la ressource est null");
             }
             Tableau t = TableauFactory.createTableau(convSet);
-            /*
-            Event[][] events = t.getMatrix().getMatrixTab();
-            var eventMatrix = DBSCAN.<Event>fit(events[1],new DistanceEvent(),2,1);
-            System.out.println(eventMatrix);
-            System.out.println("Nb clusters : " + eventMatrix.k);
-            System.out.println("Tableau clusters data : " + Arrays.toString(eventMatrix.y));
-            */
-            Matrix m = MatriceDistanceFactory.createMatrixDistance(t,convSet,1,0.8);
+            Matrix m = MatriceDistanceFactory.createMatrixDistance(t, convSet, 1, 0.8);
             System.out.println(m);
-            var dbscan = DBSCAN.fit(m.toArray(),1,1);
-            System.out.println(dbscan.k);
+            var dbscan = DBSCAN.fit(m.toArray(), 1, 1);
+            System.out.println("nombre de cluster(s) : " + dbscan.k);
             System.out.println(Arrays.toString(dbscan.y));
         } catch (IOException e) {
             e.printStackTrace();
