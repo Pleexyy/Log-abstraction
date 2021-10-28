@@ -20,7 +20,7 @@ public class FabriqueTest extends TestCase {
             Assertions.assertNotNull(conversationSet);
             Tableau tab = TableauFactory.createTableau(conversationSet);
             Assertions.assertNotNull(tab);
-            Assertions.assertEquals(2,tab.getSizeRows());
+            Assertions.assertEquals(2, tab.getSizeRows());
 
             System.out.println(tab.toStringFormated() + '\n');
             tab.printDebugMatrix();
@@ -30,34 +30,34 @@ public class FabriqueTest extends TestCase {
     }
 
     @Test
-    public void testFabrique2(){
-        try{
+    public void testFabrique2() {
+        try {
             var url = getClass().getResource("/data/log-block.txt");
             Assertions.assertNotNull(url);
             ConversationSet convSet = new LogParser().parseFile(new File(url.getFile()));
             Assertions.assertNotNull(convSet);
             Tableau tab = TableauFactory.createTableau(convSet);
             Assertions.assertNotNull(tab);
-            Assertions.assertEquals(19,tab.getSizeRows());
+            Assertions.assertEquals(19, tab.getSizeRows());
 
             System.out.println(tab.toStringFormated() + '\n');
             tab.printDebugMatrix();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void testFabrique3(){
-        try{
+    public void testFabrique3() {
+        try {
             var url = getClass().getResource("/data/ConversationSet0.txt");
             Assertions.assertNotNull(url);
             ConversationSet convSet = new LogParser().parseFile(new File(url.getFile()));
             Assertions.assertNotNull(convSet);
             Tableau tab = TableauFactory.createTableau(convSet);
             Assertions.assertNotNull(tab);
-            Assertions.assertEquals(875,tab.getSizeRows());
-        }catch (Exception e){
+            Assertions.assertEquals(875, tab.getSizeRows());
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
