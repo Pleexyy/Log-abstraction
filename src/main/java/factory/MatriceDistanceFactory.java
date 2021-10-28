@@ -1,4 +1,4 @@
-package distance;
+package factory;
 
 import model.Conversation;
 import model.ConversationSet;
@@ -6,7 +6,7 @@ import model.Event;
 import model.Tableau;
 import smile.math.matrix.Matrix;
 
-public class FabriqueMatriceDistance {
+public class MatriceDistanceFactory {
 
     public static Matrix createMatrixDistance(Tableau t, ConversationSet convSet, final int lookback, final double facteurAttenuation){
         return createMatrixDistance(t,convSet,lookback,1,facteurAttenuation);
@@ -35,7 +35,7 @@ public class FabriqueMatriceDistance {
                         // on obtient la distance
                         double distanceValue = 1.0/m.get(rowIndex,columnIndex) + incrementValue * Math.pow(facteurAttenuation, j);
 
-                        //on l'affecte
+                        // 1/0 -> affichage valeur max d'un double
                         if (Double.POSITIVE_INFINITY == distanceValue){
                             m.set(rowIndex,columnIndex,Double.MAX_VALUE);
                             m.set(columnIndex,rowIndex,Double.MAX_VALUE);
