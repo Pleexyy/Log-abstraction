@@ -12,18 +12,16 @@ import java.util.regex.Matcher;
 /*
  * Represent an event
  *
- * @param  ligne  all the event
  * @param  label  get the label from the event
  * @param  separator  get the separator of the event
  * @param  params  represent all the parameters
  */
 
 public class Event {
-    public String ligne, label;
+    public String label;
     private ArrayList<String> params;
 
     public Event(String line) {
-        this.ligne = line;
         label = SeparationWhenNoRegex.nameOfAnEvent(line);
         params = SeparationWhenNoRegex.separationWithoutRegex(line);
     }

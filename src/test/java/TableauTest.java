@@ -3,6 +3,7 @@ import junit.framework.TestCase;
 import model.ConversationSet;
 import model.Tableau;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import parser.LogParser;
@@ -10,7 +11,7 @@ import parser.LogParser;
 import java.io.File;
 import java.io.IOException;
 
-public class TableauTest extends TestCase {
+public class TableauTest {
 
     private Tableau tableau;
 

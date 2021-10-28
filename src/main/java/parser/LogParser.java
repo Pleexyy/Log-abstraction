@@ -47,9 +47,7 @@ public class LogParser {
         }
 
         Files.lines(f.toPath())
-                .forEach(line -> {
-                    convSet.addConversation(parseLine(line));
-                });
+                .forEach(line -> convSet.addConversation(parseLine(line)));
         return convSet;
     }
 }
