@@ -10,12 +10,12 @@ import parser.LogParser;
 import java.io.File;
 import java.io.IOException;
 
-public class MatrixTest extends TestCase {
+public class TableauTest extends TestCase {
 
     private Tableau tableau;
 
     @BeforeEach
-    public void init(){
+    public void init() {
         try {
             var url = getClass().getResource("data/logExemple1.txt");
             Assertions.assertNotNull(url);
@@ -29,7 +29,7 @@ public class MatrixTest extends TestCase {
     }
 
     @Test
-    public void testDeleteColumnByName(){
+    public void testDeleteColumnByName() {
         tableau.printDebugMatrix();
         tableau.deleteColumnName("Verb=String,idx=int,session=int");
         System.out.println("\n\n");
@@ -38,11 +38,34 @@ public class MatrixTest extends TestCase {
     }
 
     @Test
-    public void testDeleteColumnByName2(){
+    public void testDeleteColumnByName2() {
         tableau.printDebugMatrix();
         tableau.deleteColumnName("group=int,session=int");
         System.out.println("\n\n");
         tableau.printDebugMatrix();
         Assertions.assertNotNull(tableau);
     }
+
+    @Test
+    public void testAddRow() {
+        System.out.println("before add row");
+        tableau.printDebugMatrix();
+        tableau.addRow("new row");
+        System.out.println("\n\n");
+        System.out.println("after row added");
+        tableau.printDebugMatrix();
+        Assertions.assertNotNull(tableau);
+    }
+
+    @Test
+    public void testAddColumn() {
+        System.out.println("before add column");
+        tableau.printDebugMatrix();
+        tableau.addColumn("new column");
+        System.out.println("\n\n");
+        System.out.println("after column added");
+        tableau.printDebugMatrix();
+        Assertions.assertNotNull(tableau);
+    }
+
 }

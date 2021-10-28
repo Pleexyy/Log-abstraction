@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-public class testSeparationWhenNoRegex {
+public class SeparationWhenNoRegexTest {
 
     @Test
     public void testNameOfAnEvent() {
