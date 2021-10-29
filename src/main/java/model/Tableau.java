@@ -35,7 +35,7 @@ public class Tableau {
     }
 
     public int getSizeColumns() {
-        return labelColumn.size() - 1;
+        return labelColumn.size();
     }
 
     public String toStringFormated() {
