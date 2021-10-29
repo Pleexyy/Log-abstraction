@@ -13,6 +13,7 @@ import java.util.Arrays;
 public class Prog {
 
     private static ConversationSet convSet;
+    private static final double facteurAttenuation = 0.8;
 
     public static void main(String[] args) {
         try {
@@ -23,10 +24,10 @@ public class Prog {
                 throw new IOException("L'URL de la ressource est null");
             }
             Tableau t = TableauFactory.createTableau(convSet);
-            Matrix m = MatriceDistanceFactory.createMatrixDistance(t, convSet, 1, 0.8);
+            Matrix m = MatriceDistanceFactory.createMatrixDistance(t, convSet, 1, facteurAttenuation);
             System.out.println(m);
             var dbscan = DBSCAN.fit(m.toArray(), 1, 1);
-            System.out.println("nombre de cluster(s) : " + dbscan.k);
+            System.out.println("nombre de cluster(s) pour un facteur d'atténuation de " + facteurAttenuation + " : " + dbscan.k);
             System.out.println(Arrays.toString(dbscan.y));
         } catch (IOException e) {
             e.printStackTrace();
