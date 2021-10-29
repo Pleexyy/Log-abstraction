@@ -1,9 +1,7 @@
 import factory.TableauFactory;
-import junit.framework.TestCase;
 import model.ConversationSet;
 import model.Tableau;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import parser.LogParser;
