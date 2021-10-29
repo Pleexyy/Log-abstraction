@@ -9,7 +9,7 @@ import parser.LogParser;
 import java.io.File;
 import java.io.IOException;
 
-public class FabriqueTest extends TestCase {
+public class FabriqueTest {
 
     @Test
     public void testFabrique() {
