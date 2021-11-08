@@ -17,7 +17,7 @@ public class Prog {
 
     public static void main(String[] args) {
         try {
-            var res = Prog.class.getResource("/data/log-block.txt");
+            var res = Prog.class.getResource("/data/ConversationSet0.txt");
             if (res != null) {
                 convSet = new LogParser().parseFile(new File(res.getFile()));
             } else {
@@ -26,7 +26,7 @@ public class Prog {
             Tableau t = TableauFactory.createTableau(convSet);
             Matrix m = MatriceDistanceFactory.createMatrixDistance(t, convSet, 1, facteurAttenuation);
             System.out.println(m);
-            var dbscan = DBSCAN.fit(m.toArray(), 1, 1);
+            var dbscan = DBSCAN.fit(m.toArray(), 4, 1);
             System.out.println("nombre de cluster(s) pour un facteur d'atténuation de " + facteurAttenuation + " : " + dbscan.k);
             System.out.println(Arrays.toString(dbscan.y));
         } catch (IOException e) {

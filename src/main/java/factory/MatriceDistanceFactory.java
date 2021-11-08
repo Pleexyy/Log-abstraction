@@ -33,12 +33,7 @@ public class MatriceDistanceFactory {
                         // on trouve l'emplacement où prendre et mettre la valeur
                         int columnIndex = t.columnIndexOf(eventY.getEventWithTypes());
                         // on obtient la distance
-                        double distanceValue = 1.0 / m.get(rowIndex, columnIndex) + incrementValue * Math.pow(facteurAttenuation, j);
-
-                        // 1/0 -> affichage valeur max d'un double
-                        if (Double.POSITIVE_INFINITY == distanceValue) {
-                            distanceValue = Double.MAX_VALUE;
-                        }
+                        double distanceValue = m.get(rowIndex, columnIndex) + incrementValue * Math.pow(facteurAttenuation, j);
 
                         m.set(rowIndex, columnIndex, distanceValue);
                         m.set(columnIndex, rowIndex, distanceValue);
@@ -46,6 +41,19 @@ public class MatriceDistanceFactory {
                 }
             }
         }
+        divideDistanceMatrix(m);
         return m;
+    }
+
+    public static void divideDistanceMatrix(Matrix matrix){
+        for (int row = 0; row < matrix.nrows(); row++) {
+            for (int col = 0; col < matrix.ncols(); col++) {
+                double value = 1.0/matrix.get(row,col);
+                if (value == Double.POSITIVE_INFINITY){
+                    value = 0;
+                }
+                matrix.set(row,col,value);
+            }
+        }
     }
 }
