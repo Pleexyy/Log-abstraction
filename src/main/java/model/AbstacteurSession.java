@@ -19,7 +19,7 @@ public class AbstacteurSession {
 
     private void ajouterDansSessionAbstract(List<SessionAbstract> sessionAbstracts, Conversation conv, List<String> type){
         for (SessionAbstract s : sessionAbstracts){
-            if (s.getTypage().equals(type)){
+            if (type.equals(s.getTypage())){
                 s.addRef(conv);
                 return;
             }

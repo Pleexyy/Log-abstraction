@@ -10,7 +10,7 @@ public class SessionAbstract {
 
     public SessionAbstract(Conversation conv,List<String> typage){
         refs.add(conv);
-        typage.addAll(typage);
+        this.typage.addAll(typage);
     }
 
     public void addRef(Conversation conv){
