@@ -20,4 +20,5 @@ public class SessionAbstract {
     public List<Conversation> getRefs() {
         return refs;
     }
+
 }
