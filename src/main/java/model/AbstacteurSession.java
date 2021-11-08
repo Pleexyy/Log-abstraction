@@ -1,19 +1,30 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AbstacteurSession {
 
-    public AbstacteurSession() {
+    public List<SessionAbstract> abstracteur(ConversationSet convSet) {
 
+        List<SessionAbstract> sessionAbstracts = new ArrayList<>();
+
+        for (Conversation conv : convSet.getConversationSet()) {
+            List<String> typeString = new ArrayList<>();
+            conv.getConv().forEach(e -> typeString.add(e.getEventWithTypes()));
+            ajouterDansSessionAbstract(sessionAbstracts,conv,typeString);
+        }
+        return sessionAbstracts;
     }
 
-    public abstracteur(ConversationSet convSet) {
-        for (Conversation conv : convSet.getConversationSet()) {
-            for (int i = 0; i < conv.size(); i++) {
-                String type = conv.getConv().get(i).getEventWithTypes();
-                StringBuilder typeString = new StringBuilder();
-                typeString.append(type);
+    private void ajouterDansSessionAbstract(List<SessionAbstract> sessionAbstracts, Conversation conv, List<String> type){
+        for (SessionAbstract s : sessionAbstracts){
+            if (s.getTypage().equals(type)){
+                s.addRef(conv);
+                return;
             }
         }
+        sessionAbstracts.add(new SessionAbstract(conv,type));
     }
 
 }
