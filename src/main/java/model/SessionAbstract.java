@@ -13,6 +13,10 @@ public class SessionAbstract {
         typage.addAll(typage);
     }
 
+    public void addRef(Conversation conv){
+        refs.add(conv);
+    }
+
     public List<String> getTypage() {
         return typage;
     }
