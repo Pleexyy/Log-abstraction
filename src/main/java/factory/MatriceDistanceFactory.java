@@ -19,7 +19,7 @@ public class MatriceDistanceFactory {
             throw new IllegalArgumentException("facteurAttenuation doit être compris entre 1 et 0");
 
         List<String> typageLabel = createLabelList(sessionAbstracts);
-        Matrix m = new Matrix(typageLabel.size(),typageLabel.size());
+        Matrix m = new Matrix(typageLabel.size(), typageLabel.size());
 
         for (SessionAbstract sabs : sessionAbstracts) {
             for (int i = 1; i < sabs.getTypage().size(); i++) {
@@ -31,7 +31,7 @@ public class MatriceDistanceFactory {
                         // on trouve l'emplacement où prendre et mettre la valeur
                         int columnIndex = typageLabel.indexOf(eventY);
                         // on obtient la distance
-                        double distanceValue = 1.0/m.get(rowIndex, columnIndex) + incrementValue * Math.pow(facteurAttenuation, j);
+                        double distanceValue = 1.0 / m.get(rowIndex, columnIndex) + incrementValue * Math.pow(facteurAttenuation, j);
 
                         // 1/0 -> affichage valeur max d'un double
                         if (Double.POSITIVE_INFINITY == distanceValue) {
@@ -47,11 +47,11 @@ public class MatriceDistanceFactory {
         return m;
     }
 
-    private static List<String> createLabelList(List<SessionAbstract> sessionAbstractList){
+    public static List<String> createLabelList(List<SessionAbstract> sessionAbstractList) {
         List<String> typageList = new ArrayList<>();
-        for (SessionAbstract s : sessionAbstractList){
-            for (String type : s.getTypage()){
-                if (!typageList.contains(type)){
+        for (SessionAbstract s : sessionAbstractList) {
+            for (String type : s.getTypage()) {
+                if (!typageList.contains(type)) {
                     typageList.add(type);
                 }
             }

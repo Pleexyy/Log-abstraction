@@ -1,3 +1,4 @@
+import factory.MatriceDistanceFactory;
 import model.AbstacteurSession;
 import model.ConversationSet;
 import org.junit.jupiter.api.Assertions;
@@ -7,10 +8,13 @@ import parser.LogParser;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
-public class AbstracteurTest {
+public class MatriceDistanceFactoryTest {
 
     private ConversationSet conversationSet;
+    private MatriceDistanceFactory mdf;
+    private AbstacteurSession abstacteurSession;
 
     @BeforeEach
     public void init() {
@@ -24,17 +28,27 @@ public class AbstracteurTest {
         }
         Assertions.assertNotNull(conversationSet);
         this.conversationSet = conversationSet;
+        mdf = new MatriceDistanceFactory();
+        abstacteurSession = new AbstacteurSession();
     }
 
     @Test
-    public void testAbstract() {
-        AbstacteurSession abstacteurSession = new AbstacteurSession();
+    public void testCreateMatrixDistance() {
+        int expectedSize = 4 * 4;
         var sessionsAbstracts = abstacteurSession.abstracteur(conversationSet);
-        Assertions.assertNotNull(sessionsAbstracts);
-        Assertions.assertNotEquals(conversationSet.getConversationSet().size(), sessionsAbstracts.size());
-        for (var x : sessionsAbstracts) {
-            System.out.println("types: " + x.getTypage() + " refs:" + x.getRefs());
-        }
+        var md = mdf.createMatrixDistance(sessionsAbstracts, 1, 1, 0.8);
+
+        Assertions.assertNotNull(md);
+        Assertions.assertEquals(md.size(), expectedSize);
+    }
+
+    @Test
+    public void testCreateLabelList() {
+        var sessionsAbstracts = abstacteurSession.abstracteur(conversationSet);
+        List<String> typageList = mdf.createLabelList(sessionsAbstracts);
+
+        Assertions.assertNotNull(typageList);
+        System.out.println(typageList);
     }
 
 }

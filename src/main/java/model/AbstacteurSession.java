@@ -12,19 +12,19 @@ public class AbstacteurSession {
         for (Conversation conv : convSet.getConversationSet()) {
             List<String> typeString = new ArrayList<>();
             conv.getConv().forEach(e -> typeString.add(e.getEventWithTypes()));
-            ajouterDansSessionAbstract(sessionAbstracts,conv,typeString);
+            ajouterDansSessionAbstract(sessionAbstracts, conv, typeString);
         }
         return sessionAbstracts;
     }
 
-    private void ajouterDansSessionAbstract(List<SessionAbstract> sessionAbstracts, Conversation conv, List<String> type){
-        for (SessionAbstract s : sessionAbstracts){
-            if (type.equals(s.getTypage())){
+    private void ajouterDansSessionAbstract(List<SessionAbstract> sessionAbstracts, Conversation conv, List<String> type) {
+        for (SessionAbstract s : sessionAbstracts) {
+            if (type.equals(s.getTypage())) {
                 s.addRef(conv);
                 return;
             }
         }
-        sessionAbstracts.add(new SessionAbstract(conv,type));
+        sessionAbstracts.add(new SessionAbstract(conv, type));
     }
 
 }

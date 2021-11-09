@@ -5,15 +5,15 @@ import java.util.List;
 
 public class SessionAbstract {
 
-    private List<Conversation> refs = new ArrayList<>();
-    private List<String> typage = new ArrayList<>();
+    private final List<Conversation> refs = new ArrayList<>();
+    private final List<String> typage = new ArrayList<>();
 
-    public SessionAbstract(Conversation conv,List<String> typage){
+    public SessionAbstract(Conversation conv, List<String> typage) {
         refs.add(conv);
         this.typage.addAll(typage);
     }
 
-    public void addRef(Conversation conv){
+    public void addRef(Conversation conv) {
         refs.add(conv);
     }
 

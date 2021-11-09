@@ -11,20 +11,19 @@ import java.util.Arrays;
 
 public class Prog {
 
-    private static ConversationSet convSet;
     private static final double facteurAttenuation = 0.8;
+    private static ConversationSet convSet;
 
     public static void main(String[] args) {
         try {
-            var res = Prog.class.getResource("/data/ConversationSet0.txt");
+            var res = Prog.class.getResource("/data/logExemple1.txt");
             if (res != null) {
                 convSet = new LogParser().parseFile(new File(res.getFile()));
             } else {
                 throw new IOException("L'URL de la ressource est null");
             }
-            // Tableau t = TableauFactory.createTableau(convSet);
             var sessionsAbstracts = new AbstacteurSession().abstracteur(convSet);
-            for (var x : sessionsAbstracts){
+            for (var x : sessionsAbstracts) {
                 System.out.println("types: " + x.getTypage() + " refs:" + x.getRefs().size());
             }
             Matrix m = MatriceDistanceFactory.createMatrixDistance(sessionsAbstracts, 1, facteurAttenuation);
