@@ -22,16 +22,16 @@ public class MatriceDistanceFactory {
         Matrix m = new Matrix(typageLabel.size(),typageLabel.size());
 
         for (SessionAbstract sabs : sessionAbstracts) {
-            for (int i = 0; i < sabs.getTypage().size(); i++) {
+            for (int i = 1; i < sabs.getTypage().size(); i++) {
                 String ref = sabs.getTypage().get(i);
-                int rowIndex = getIndexOf(typageLabel,ref);
+                int rowIndex = typageLabel.indexOf(ref);
                 for (int j = 1; j <= lookback; j++) {
                     if (i >= j) {
                         String eventY = sabs.getTypage().get(i - j);
                         // on trouve l'emplacement où prendre et mettre la valeur
-                        int columnIndex = getIndexOf(typageLabel,eventY);
+                        int columnIndex = typageLabel.indexOf(eventY);
                         // on obtient la distance
-                        double distanceValue = m.get(rowIndex, columnIndex) + incrementValue * Math.pow(facteurAttenuation, j);
+                        double distanceValue = 1.0/m.get(rowIndex, columnIndex) + incrementValue * Math.pow(facteurAttenuation, j);
 
                         // 1/0 -> affichage valeur max d'un double
                         if (Double.POSITIVE_INFINITY == distanceValue) {
@@ -51,20 +51,11 @@ public class MatriceDistanceFactory {
         List<String> typageList = new ArrayList<>();
         for (SessionAbstract s : sessionAbstractList){
             for (String type : s.getTypage()){
-                getIndexOf(typageList,type);
+                if (!typageList.contains(type)){
+                    typageList.add(type);
+                }
             }
         }
         return typageList;
-    }
-
-    private static int getIndexOf(List<String> typageLabel, String ref) {
-        int size = typageLabel.size();
-        for (int i = 0; i < size; i++) {
-            if (typageLabel.get(i).equals(ref)){
-                return i;
-            }
-        }
-        typageLabel.add(ref);
-        return size;
     }
 }
