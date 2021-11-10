@@ -1,10 +1,12 @@
 import factory.MatriceDistanceFactory;
 import model.AbstacteurSession;
 import model.ConversationSet;
+import model.SessionAbstract;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import parser.LogParser;
+import smile.math.matrix.Matrix;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,8 +14,10 @@ import java.util.List;
 
 public class MatriceDistanceFactoryTest {
 
+    private final int lookback = 1;
+    private final int incrementValue = 1;
+    private final double facteurAttenuation = 0.8;
     private ConversationSet conversationSet;
-    private MatriceDistanceFactory mdf;
     private AbstacteurSession abstacteurSession;
 
     @BeforeEach
@@ -28,15 +32,14 @@ public class MatriceDistanceFactoryTest {
         }
         Assertions.assertNotNull(conversationSet);
         this.conversationSet = conversationSet;
-        mdf = new MatriceDistanceFactory();
         abstacteurSession = new AbstacteurSession();
     }
 
     @Test
     public void testCreateMatrixDistance() {
         int expectedSize = 4 * 4;
-        var sessionsAbstracts = abstacteurSession.abstracteur(conversationSet);
-        var md = mdf.createMatrixDistance(sessionsAbstracts, 1, 1, 0.8);
+        List<SessionAbstract> sessionsAbstracts = abstacteurSession.abstracteur(conversationSet);
+        Matrix md = MatriceDistanceFactory.createMatrixDistance(sessionsAbstracts, lookback, incrementValue, facteurAttenuation);
 
         Assertions.assertNotNull(md);
         Assertions.assertEquals(md.size(), expectedSize);
@@ -44,8 +47,8 @@ public class MatriceDistanceFactoryTest {
 
     @Test
     public void testCreateLabelList() {
-        var sessionsAbstracts = abstacteurSession.abstracteur(conversationSet);
-        List<String> typageList = mdf.createLabelList(sessionsAbstracts);
+        List<SessionAbstract> sessionsAbstracts = abstacteurSession.abstracteur(conversationSet);
+        List<String> typageList = MatriceDistanceFactory.createLabelList(sessionsAbstracts);
 
         Assertions.assertNotNull(typageList);
         System.out.println(typageList);
