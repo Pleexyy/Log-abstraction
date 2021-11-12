@@ -1,0 +1,1 @@
+e0(link=200000, session=682); e1(response=280000, session=682); e1(Verb=GET, idx=3, session=1); e2(response=300, session=1); e3(group=02, switchcmd=ChgColor, session=750); e4(Verb=GET, Uri=/json.htm, session=849); e5(status=200, response=OK, type=application/json, session=849);
