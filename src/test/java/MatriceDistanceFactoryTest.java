@@ -1,10 +1,12 @@
 import factory.MatriceDistanceFactory;
 import model.AbstacteurSession;
 import model.ConversationSet;
+import model.SessionAbstract;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import parser.LogParser;
+import smile.math.matrix.Matrix;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +14,9 @@ import java.util.List;
 
 public class MatriceDistanceFactoryTest {
 
+    private final int lookback = 1;
+    private final int incrementValue = 1;
+    private final double facteurAttenuation = 0.8;
     private ConversationSet conversationSet;
     private AbstacteurSession abstacteurSession;
 
@@ -33,8 +38,8 @@ public class MatriceDistanceFactoryTest {
     @Test
     public void testCreateMatrixDistance() {
         int expectedSize = 4 * 4;
-        var sessionsAbstracts = abstacteurSession.abstracteur(conversationSet);
-        var md = MatriceDistanceFactory.createMatrixDistance(sessionsAbstracts, 1, 1, 0.8);
+        List<SessionAbstract> sessionsAbstracts = abstacteurSession.abstracteur(conversationSet);
+        Matrix md = MatriceDistanceFactory.createMatrixDistance(sessionsAbstracts, lookback, incrementValue, facteurAttenuation);
 
         Assertions.assertNotNull(md);
         Assertions.assertEquals(md.size(), expectedSize);
@@ -42,7 +47,7 @@ public class MatriceDistanceFactoryTest {
 
     @Test
     public void testCreateLabelList() {
-        var sessionsAbstracts = abstacteurSession.abstracteur(conversationSet);
+        List<SessionAbstract> sessionsAbstracts = abstacteurSession.abstracteur(conversationSet);
         List<String> typageList = MatriceDistanceFactory.createLabelList(sessionsAbstracts);
 
         Assertions.assertNotNull(typageList);

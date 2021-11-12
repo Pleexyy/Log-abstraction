@@ -22,7 +22,7 @@ public class MatrixTest2 {
                 System.out.println("types: " + anAbstract.getTypage() + " refs:" + anAbstract.getRefs().size());
             }
 
-            var m = MatriceDistanceFactory.createMatrixDistance(sessionsAbs,4,0.3);
+            var m = MatriceDistanceFactory.createMatrixDistance(sessionsAbs, 4, 0.3);
             System.out.println(m);
         } catch (IOException e) {
             e.printStackTrace();
