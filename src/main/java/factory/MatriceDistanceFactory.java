@@ -31,10 +31,15 @@ public class MatriceDistanceFactory {
                         // on trouve l'emplacement où prendre et mettre la valeur
                         int columnIndex = typageLabel.indexOf(eventY);
                         // on obtient la distance
-                        double distanceValue = m.get(rowIndex, columnIndex) + incrementValue * Math.pow(facteurAttenuation, j);
 
-                        m.set(rowIndex, columnIndex, distanceValue);
-                        m.set(columnIndex, rowIndex, distanceValue);
+                        // pour ne pas faire l'opération sur la diagonale
+                        if (rowIndex != columnIndex) {
+                            double distanceValue;
+                            distanceValue = m.get(rowIndex, columnIndex) + incrementValue * Math.pow(facteurAttenuation, j);
+
+                            m.set(rowIndex, columnIndex, distanceValue);
+                            m.set(columnIndex, rowIndex, distanceValue);
+                        }
                     }
                 }
             }

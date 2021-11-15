@@ -54,4 +54,18 @@ public class MatriceDistanceFactoryTest {
         System.out.println(typageList);
     }
 
+    @Test
+    public void testDiagonalOfZero() {
+        List<SessionAbstract> sessionsAbstracts = abstacteurSession.abstracteur(conversationSet);
+        Matrix md = MatriceDistanceFactory.createMatrixDistance(sessionsAbstracts, lookback, incrementValue, facteurAttenuation);
+
+        for (int i = 0; i < md.nrows(); i++) {
+            for (int j = 0; j < md.ncols(); j++) {
+                if (i == j) {
+                    Assertions.assertEquals(md.get(i, j), 0);
+                }
+            }
+        }
+    }
+
 }
