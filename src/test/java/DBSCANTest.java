@@ -65,6 +65,23 @@ public class DBSCANTest {
     }
 
     @Test
+    public void testDBSCANOnDifferentsSessions() {
+        try {
+            var url = getClass().getResource("data/sessionsDifferentes.txt");
+            Assertions.assertNotNull(url);
+            ConversationSet conversationSet = new LogParser().parseFile(new File(url.getFile()));
+            Assertions.assertNotNull(conversationSet);
+            var sessionsAbs = new AbstacteurSession().abstracteur(conversationSet);
+            var m = MatriceDistanceFactory.createMatrixDistance(sessionsAbs,7,20,0.9);
+            System.out.println(m);
+
+            printInfoDBSCAN(DBSCAN.fit(m.toArray(),2,2000));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     public void testWithDistanceMatrixFromInternet() {
         Matrix m = new Matrix(12, 12);
 

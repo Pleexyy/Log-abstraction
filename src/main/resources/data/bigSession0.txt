@@ -9,7 +9,7 @@ e0(cle=2); e1(status=unknow); e3(mock=test); e4(titi=toto);
 e0(cle=2); e1(status=unknow); e3(mock=test); e4(titi=toto);
 e0(cle=2); e1(status=unknow); e3(mock=test); e4(titi=toto);
 e0(cle=2); e1(status=unknow); e3(mock=test); e4(titi=toto);
-e0(cle=2); e1(status=unknow); e3(mock=test); e4(titi=toto);
+e0(cle=2); e1(status=unknow); e3(mocjhk=test); e4(titi=toto);
 e0(Uri=truc); e1(spec=9); e2(volt=0.02);
 e0(Uri=truc); e1(spec=9); e2(volt=0.02);
 e0(Uri=truc); e1(spec=9); e2(volt=0.02);
