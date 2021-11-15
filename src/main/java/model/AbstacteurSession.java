@@ -11,7 +11,7 @@ public class AbstacteurSession {
 
         for (Conversation conv : convSet.getConversationSet()) {
             List<String> typeString = new ArrayList<>();
-            conv.getConv().forEach(e -> typeString.add(e.getEventWithTypes()));
+            conv.getConv().forEach(e -> typeString.add(e.getLabel() + "(" + e.getEventWithTypes() + ")"));
             ajouterDansSessionAbstract(sessionAbstracts, conv, typeString);
         }
         return sessionAbstracts;

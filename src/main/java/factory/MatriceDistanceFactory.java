@@ -49,8 +49,8 @@ public class MatriceDistanceFactory {
     private static void inverseMatrix(Matrix m) {
         for (int i = 0; i < m.nrows(); i++) {
             for (int j = 0; j < m.ncols(); j++) {
-                if (j != i){
-                    double nval = 1.0/m.get(i,j);
+                if (j != i) {
+                    double nval = 1.0 / m.get(i, j);
                     if (Double.POSITIVE_INFINITY == nval) {
                         nval = Double.MAX_VALUE;
                     }
