@@ -30,6 +30,9 @@ public class MatriceDistanceFactory {
                         String eventY = sabs.getTypage().get(i - j);
                         // on trouve l'emplacement où prendre et mettre la valeur
                         int columnIndex = typageLabel.indexOf(eventY);
+
+                        if (rowIndex == columnIndex)
+                            continue;
                         // on obtient la distance
                         double distanceValue = m.get(rowIndex, columnIndex) + incrementValue * Math.pow(facteurAttenuation, j);
 
@@ -39,7 +42,22 @@ public class MatriceDistanceFactory {
                 }
             }
         }
+        inverseMatrix(m);
         return m;
+    }
+
+    private static void inverseMatrix(Matrix m) {
+        for (int i = 0; i < m.nrows(); i++) {
+            for (int j = 0; j < m.ncols(); j++) {
+                if (j != i){
+                    double nval = 1.0/m.get(i,j);
+                    if (Double.POSITIVE_INFINITY == nval) {
+                        nval = Double.MAX_VALUE;
+                    }
+                    m.set(i, j, nval);
+                }
+            }
+        }
     }
 
     public static List<String> createLabelList(List<SessionAbstract> sessionAbstractList) {
