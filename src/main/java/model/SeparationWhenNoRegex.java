@@ -20,7 +20,6 @@ public class SeparationWhenNoRegex {
     public static String nameOfAnEvent(String line) {
         final String SEPARATEUR = "\\(";
         String[] mots = line.split(SEPARATEUR);
-        String str = mots[0];
-        return str;
+        return mots[0];
     }
 }

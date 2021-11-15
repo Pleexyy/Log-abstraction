@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Arrays;
-import java.util.function.Predicate;
 
 /**
  * LogParser
@@ -25,8 +24,8 @@ public class LogParser {
     private Conversation parseLine(String line) {
         Conversation conv = new Conversation();
         var split = line.split("\\);");
-        if (split[split.length-1].isBlank()){
-            split = Arrays.copyOf(split,split.length-1);
+        if (split[split.length - 1].isBlank()) {
+            split = Arrays.copyOf(split, split.length - 1);
         }
         for (String strEvent : split) {
             conv.nouvelEvent(new Event(strEvent.strip() + ')'));
@@ -48,9 +47,7 @@ public class LogParser {
         }
 
         Files.lines(f.toPath())
-                .forEach(line -> {
-                    convSet.addConversation(parseLine(line));
-                });
+                .forEach(line -> convSet.addConversation(parseLine(line)));
         return convSet;
     }
 }

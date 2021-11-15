@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 
 public class ConversationSet {
-    public ArrayList<Conversation> conversations;
+    private final ArrayList<Conversation> conversations;
 
     public ConversationSet() {
         conversations = new ArrayList<>();
@@ -17,15 +17,6 @@ public class ConversationSet {
 
     public void addConversation(Conversation c) {
         conversations.add(c);
-    }
-
-    /**
-     * retourne la taille des conversations
-     *
-     * @return la taille de la liste des conversations de type Conversation
-     */
-    public int getSize() {
-        return this.conversations.size();
     }
 
     /**

@@ -1,9 +1,8 @@
-import junit.framework.TestCase;
 import model.Event;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class InterpreterTest extends TestCase {
+public class InterpreterTest {
 
     @Test
     public void testNewEventModel() {
