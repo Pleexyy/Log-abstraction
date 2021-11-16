@@ -4,9 +4,16 @@ import model.SessionAbstract;
 import smile.math.matrix.Matrix;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MatriceDistanceFactory {
+
+    private static List<String> typage;
+
+    public static List<String> getListeLabel(){
+        return Collections.unmodifiableList(typage);
+    }
 
     public static Matrix createMatrixDistance(List<SessionAbstract> sessionAbstracts, final int lookback, final double facteurAttenuation) {
         return createMatrixDistance(sessionAbstracts, lookback, 1, facteurAttenuation);
@@ -61,14 +68,14 @@ public class MatriceDistanceFactory {
     }
 
     public static List<String> createLabelList(List<SessionAbstract> sessionAbstractList) {
-        List<String> typageList = new ArrayList<>();
+        typage = new ArrayList<>();
         for (SessionAbstract s : sessionAbstractList) {
             for (String type : s.getTypage()) {
-                if (!typageList.contains(type)) {
-                    typageList.add(type);
+                if (!typage.contains(type)) {
+                    typage.add(type);
                 }
             }
         }
-        return typageList;
+        return typage;
     }
 }
