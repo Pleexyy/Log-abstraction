@@ -30,7 +30,7 @@ public class Prog {
             }
             Matrix m = MatriceDistanceFactory.createMatrixDistance(sessionsAbstracts, 7, 20, facteurAttenuation);
             System.out.println("\n" + m);
-            var dbscan = DBSCAN.fit(m.toArray(), 2, 20);
+            var dbscan = DBSCAN.fit(m.toArray(), 1, 20);
 
             printVerboseHuman(dbscan);
         } catch (IOException e) {
