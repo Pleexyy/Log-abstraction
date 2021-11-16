@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 /*
  * represent a conversation
- * @param  conv  save the conversation
+ * @param conv save the conversation
  */
 
 public class Conversation {

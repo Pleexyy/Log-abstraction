@@ -44,6 +44,7 @@ public class DBSCANTest {
 
         System.out.println(m);
 
+
         printInfoDBSCAN(DBSCAN.fit(m.toArray(), 1, 1));
     }
 
@@ -55,10 +56,10 @@ public class DBSCANTest {
             ConversationSet conversationSet = new LogParser().parseFile(new File(url.getFile()));
             Assertions.assertNotNull(conversationSet);
             var sessionsAbs = new AbstacteurSession().abstracteur(conversationSet);
-            var m = MatriceDistanceFactory.createMatrixDistance(sessionsAbs,7,20,0.9);
+            var m = MatriceDistanceFactory.createMatrixDistance(sessionsAbs, 7, 20, 0.9);
             System.out.println(m);
 
-            printInfoDBSCAN(DBSCAN.fit(m.toArray(),2,2000));
+            printInfoDBSCAN(DBSCAN.fit(m.toArray(), 2, 2000));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -72,10 +73,10 @@ public class DBSCANTest {
             ConversationSet conversationSet = new LogParser().parseFile(new File(url.getFile()));
             Assertions.assertNotNull(conversationSet);
             var sessionsAbs = new AbstacteurSession().abstracteur(conversationSet);
-            var m = MatriceDistanceFactory.createMatrixDistance(sessionsAbs,7,20,0.9);
+            var m = MatriceDistanceFactory.createMatrixDistance(sessionsAbs, 7, 20, 0.9);
             System.out.println(m);
 
-            printInfoDBSCAN(DBSCAN.fit(m.toArray(),2,2000));
+            printInfoDBSCAN(DBSCAN.fit(m.toArray(), 2, 2000));
         } catch (IOException e) {
             e.printStackTrace();
         }
