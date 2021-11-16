@@ -11,7 +11,7 @@ public class MatriceDistanceFactory {
 
     private static List<String> typage;
 
-    public static List<String> getListeLabel(){
+    public static List<String> getListeLabel() {
         return Collections.unmodifiableList(typage);
     }
 

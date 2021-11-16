@@ -8,7 +8,7 @@ import parser.LogParser;
 import java.io.File;
 import java.io.IOException;
 
-public class MatrixTest2 {
+public class MatriceDistanceFactoryTest2 {
     @Test
     public void testDistanceMatrixOnLogCopyPaste() {
         var url = getClass().getResource("data/log-copy-paste.txt");
