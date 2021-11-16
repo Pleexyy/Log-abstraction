@@ -5,16 +5,12 @@ import utils.PatternPreCompiled;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
-/**
- * @author Blot Elliott
- */
-
 /*
  * Represent an event
  *
- * @param  label  get the label from the event
- * @param  separator  get the separator of the event
- * @param  params  represent all the parameters
+ * @param label get the label from the event
+ * @param separator get the separator of the event
+ * @param params represent all the parameters
  */
 
 public class Event {
@@ -45,13 +41,12 @@ public class Event {
     }
 
     public String toString() {
-        String res;
         String separator = ",";
         StringBuilder resBuilder = new StringBuilder(label + "(");
         for (String param : params) {
             resBuilder.append(param).append(separator);
         }
-        res = resBuilder.toString();
+        String res = resBuilder.toString();
         res = res.substring(0, res.length() - separator.length());
         res = res + ")";
         return res;
@@ -63,7 +58,7 @@ public class Event {
      * @param params
      * @return String
      */
-    public String getParameters(String params) {
+    public String getParsedParameters(String params) {
         // on divise notre chaine de caractères en tableau
         String[] parts = params.split("=");
 
@@ -105,7 +100,7 @@ public class Event {
         String parameter, assignment;
         // on parcours nos données
         for (int i = 0; i < this.getParams().size(); i++) {
-            parameter = this.getParameters(this.getParams().get(i));
+            parameter = this.getParsedParameters(this.getParams().get(i));
             assignment = this.getTypedAssignments(this.getParams().get(i));
             // concaténation de nos paramètres et de nos assignments
             stringedEvent.append(parameter.concat("=").concat(assignment).concat(","));

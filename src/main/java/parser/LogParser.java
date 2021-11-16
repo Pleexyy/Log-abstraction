@@ -24,6 +24,7 @@ public class LogParser {
     private Conversation parseLine(String line) {
         Conversation conv = new Conversation();
         var split = line.split("\\);");
+        // si présence d'un espace en fin de ligne -> on le supprime
         if (split[split.length - 1].isBlank()) {
             split = Arrays.copyOf(split, split.length - 1);
         }
@@ -42,8 +43,11 @@ public class LogParser {
      */
     public ConversationSet parseFile(File f) throws IOException {
         final ConversationSet convSet = new ConversationSet();
-        if (!f.canRead() || !f.isFile()) {
-            throw new IOException("Aucun fichier n'est \"" + f.getAbsolutePath() + "\", soit n'est pas lisible");
+        if (!f.isFile()) {
+            throw new IOException("Le fichier se trouvant à l'emplacement \"" + f.getAbsolutePath() + "\", n'est pas un fichier");
+        }
+        if (!f.canRead()) {
+            throw new IOException("Le fichier se trouvant à l'emplacement \"" + f.getAbsolutePath() + "\", n'est pas lisible");
         }
 
         Files.lines(f.toPath())

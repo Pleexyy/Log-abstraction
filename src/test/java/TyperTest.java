@@ -17,7 +17,7 @@ public class TyperTest {
         final String param = "Verb=GET";
         final String expectedParameter = "Verb";
 
-        Assertions.assertEquals(event.getParameters(param), expectedParameter);
+        Assertions.assertEquals(event.getParsedParameters(param), expectedParameter);
     }
 
     @Test

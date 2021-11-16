@@ -21,9 +21,9 @@ public class MatriceDistanceFactory {
 
     public static Matrix createMatrixDistance(List<SessionAbstract> sessionAbstracts, final int lookback, final int incrementValue, final double facteurAttenuation) {
         if (lookback < 0 || incrementValue < 0)
-            throw new IllegalArgumentException("loopback ou incrementValue est négatif");
+            throw new IllegalArgumentException("la lookback ou la valeur d'incrémentation est négatif");
         if (facteurAttenuation <= 0 || facteurAttenuation > 1)
-            throw new IllegalArgumentException("facteurAttenuation doit être compris entre 1 et 0");
+            throw new IllegalArgumentException("le facteur d'atténuation doit être compris entre 1 et 0");
 
         List<String> typageLabel = createLabelList(sessionAbstracts);
         Matrix m = new Matrix(typageLabel.size(), typageLabel.size());
@@ -37,12 +37,13 @@ public class MatriceDistanceFactory {
                         String eventY = sabs.getTypage().get(i - j);
                         // on trouve l'emplacement où prendre et mettre la valeur
                         int columnIndex = typageLabel.indexOf(eventY);
-                        // pour ne pas faire l'operation sur les diagonales
+                        // pour ne pas faire l'operation sur la diagonale
                         if (rowIndex == columnIndex)
                             continue;
                         // on obtient la distance
                         double distanceValue = m.get(rowIndex, columnIndex) + incrementValue * Math.pow(facteurAttenuation, j);
 
+                        // notion de symétrie
                         m.set(rowIndex, columnIndex, distanceValue);
                         m.set(columnIndex, rowIndex, distanceValue);
                     }
@@ -56,6 +57,7 @@ public class MatriceDistanceFactory {
     private static void inverseMatrix(Matrix m) {
         for (int i = 0; i < m.nrows(); i++) {
             for (int j = 0; j < m.ncols(); j++) {
+                // on calcule la distance pour tous les éléments sauf lorsque rowIndex == columnIndex
                 if (j != i) {
                     double nval = 1.0 / m.get(i, j);
                     if (Double.POSITIVE_INFINITY == nval) {

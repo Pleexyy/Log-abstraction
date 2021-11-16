@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /*
  * Represent a ConversationSet
  *
- * @param  conversation  list of conversation
+ * @param conversation list of conversation
  */
 
 public class ConversationSet {
