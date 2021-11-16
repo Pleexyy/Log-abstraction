@@ -10,7 +10,7 @@ Implémentation d'un algorithme d’abstraction de séquences d’évènements d
 
 Vous pouvez compiler le programme en exécutant le script **build.sh**.
 
-## Authors
+## Auteurs
 
 * Gabriel THEUWS
 * Thibaud BONNEVILLE
