@@ -54,6 +54,9 @@ public class MatriceDistanceFactory {
         return m;
     }
 
+    /**
+     * @param m la matrice de distance
+     */
     private static void inverseMatrix(Matrix m) {
         for (int i = 0; i < m.nrows(); i++) {
             for (int j = 0; j < m.ncols(); j++) {
