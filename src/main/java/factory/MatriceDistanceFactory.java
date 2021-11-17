@@ -11,6 +11,9 @@ public class MatriceDistanceFactory {
 
     private static List<String> typage;
 
+    /**
+     * @return typage la liste des labels
+     */
     public static List<String> getListeLabel() {
         return Collections.unmodifiableList(typage);
     }
@@ -19,11 +22,18 @@ public class MatriceDistanceFactory {
         return createMatrixDistance(sessionAbstracts, lookback, 1, facteurAttenuation);
     }
 
+    /**
+     * @param sessionAbstracts   liste de sessions abstraites
+     * @param lookback           fenêtre de recherche
+     * @param incrementValue     valeur d'incrémentation
+     * @param facteurAttenuation facteur d'atténuation compris entre 0 et 1
+     * @return m la matrice de distance
+     */
     public static Matrix createMatrixDistance(List<SessionAbstract> sessionAbstracts, final int lookback, final int incrementValue, final double facteurAttenuation) {
         if (lookback < 0 || incrementValue < 0)
             throw new IllegalArgumentException("la lookback ou la valeur d'incrémentation est négatif");
         if (facteurAttenuation <= 0 || facteurAttenuation > 1)
-            throw new IllegalArgumentException("le facteur d'atténuation doit être compris entre 1 et 0");
+            throw new IllegalArgumentException("le facteur d'atténuation doit être compris entre 0 et 1");
 
         List<String> typageLabel = createLabelList(sessionAbstracts);
         Matrix m = new Matrix(typageLabel.size(), typageLabel.size());
@@ -72,6 +82,10 @@ public class MatriceDistanceFactory {
         }
     }
 
+    /**
+     * @param sessionAbstractList liste de sessions abstraites
+     * @return typage la liste des labels
+     */
     public static List<String> createLabelList(List<SessionAbstract> sessionAbstractList) {
         typage = new ArrayList<>();
         for (SessionAbstract s : sessionAbstractList) {

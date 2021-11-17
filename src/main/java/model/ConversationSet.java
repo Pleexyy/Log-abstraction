@@ -16,9 +16,9 @@ public class ConversationSet {
     }
 
     /**
-     * retourne les conversations
+     * ajoute une conversation à la liste de conversations
      *
-     * @return la liste des conversations de type Conversation
+     * @param c conversation de type Conversation
      */
     public void addConversation(Conversation c) {
         conversations.add(c);
