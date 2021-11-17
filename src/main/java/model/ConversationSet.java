@@ -15,6 +15,11 @@ public class ConversationSet {
         conversations = new ArrayList<>();
     }
 
+    /**
+     * ajoute une conversation à la liste de conversations
+     *
+     * @param c conversation de type Conversation
+     */
     public void addConversation(Conversation c) {
         conversations.add(c);
     }

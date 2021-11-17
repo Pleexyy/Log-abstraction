@@ -22,6 +22,9 @@ public class Conversation {
         return this.conv.size();
     }
 
+    /**
+     * @param evenement de type Event
+     */
     public void nouvelEvent(Event evenement) {
         this.conv.add(evenement);
     }

@@ -18,7 +18,7 @@ public class Prog {
 
     public static void main(String[] args) {
         try {
-            var res = Prog.class.getResource("/data/test.txt");
+            var res = Prog.class.getResource("/data/sessionsDifferentes.txt");
             if (res != null) {
                 convSet = new LogParser().parseFile(new File(res.getFile()));
             } else {
@@ -30,7 +30,7 @@ public class Prog {
             }
             Matrix m = MatriceDistanceFactory.createMatrixDistance(sessionsAbstracts, 7, 20, facteurAttenuation);
             System.out.println("\n" + m);
-            var dbscan = DBSCAN.fit(m.toArray(), 2, 20);
+            var dbscan = DBSCAN.fit(m.toArray(), 1, 20);
 
             printVerboseHuman(dbscan);
         } catch (IOException e) {
@@ -38,6 +38,9 @@ public class Prog {
         }
     }
 
+    /**
+     * @param dbscan type double
+     */
     private static void printVerboseHuman(DBSCAN<double[]> dbscan) {
         System.out.println("Nombre de cluster(s) pour un facteur d'atténuation de " + facteurAttenuation + " : " + dbscan.k);
 

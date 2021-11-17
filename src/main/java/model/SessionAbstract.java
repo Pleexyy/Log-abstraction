@@ -13,14 +13,27 @@ public class SessionAbstract {
         this.typage.addAll(typage);
     }
 
+    /**
+     * @param conv de type Conversation
+     */
     public void addRef(Conversation conv) {
         refs.add(conv);
     }
 
+    /**
+     * retourne les typages
+     *
+     * @return la liste typage de type String
+     */
     public List<String> getTypage() {
         return typage;
     }
 
+    /**
+     * retourne les références
+     *
+     * @return la liste refs de type Conversation
+     */
     public List<Conversation> getRefs() {
         return refs;
     }
