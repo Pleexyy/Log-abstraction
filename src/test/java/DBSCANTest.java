@@ -5,13 +5,45 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import parser.LogParser;
 import smile.clustering.DBSCAN;
+import smile.clustering.PartitionClustering;
 import smile.math.matrix.Matrix;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DBSCANTest {
+
+    private static void printVerboseHuman(DBSCAN<double[]> dbscan) {
+        ArrayList<String>[] abstractEventClustered = new ArrayList[dbscan.k];
+        for (int i = 0; i < abstractEventClustered.length; i++) {
+            abstractEventClustered[i] = new ArrayList<>();
+        }
+        // List<String> abstractEventNoise = new ArrayList<>();
+
+        for (int i = 0; i < dbscan.y.length; i++) {
+            String strEvtAbs = MatriceDistanceFactory.getListeLabel().get(i);
+            int clusterLabel = dbscan.y[i];
+            if (clusterLabel == PartitionClustering.OUTLIER) {
+                // si un label correspond à du bruit, on l'ajoute à la liste
+                // abstractEventNoise.add(strEvtAbs);
+            } else {
+                // sinon on l'ajoute dans sa liste d'événement clusterisé
+                abstractEventClustered[clusterLabel].add(strEvtAbs);
+            }
+        }
+        System.out.println("Il y a " + dbscan.k + " cluster(s) :");
+
+        for (int i = 0; i < abstractEventClustered.length; i++) {
+            System.out.println("cluster n°"+i);
+            System.out.println("\t"+abstractEventClustered[i]);
+        }
+
+        int nbNoise = dbscan.size[dbscan.size.length - 1];
+        System.out.println("\nIl y a " + nbNoise + " événement(s) abstrait(s) qui est/sont considéré(s) comme du bruit");
+        // System.out.println("Il s'agit de : " + abstractEventNoise);
+    }
 
     private void printInfoDBSCAN(DBSCAN<double[]> dbscan) {
         System.out.println("DBSCAN : nb cluster : " + dbscan.k);
@@ -73,10 +105,12 @@ public class DBSCANTest {
             ConversationSet conversationSet = new LogParser().parseFile(new File(url.getFile()));
             Assertions.assertNotNull(conversationSet);
             var sessionsAbs = new AbstacteurSession().abstracteur(conversationSet);
-            var m = MatriceDistanceFactory.createMatrixDistance(sessionsAbs, 7, 20, 0.9);
+            var m = MatriceDistanceFactory.createMatrixDistance(sessionsAbs, 2, 20, 0.7);
             System.out.println(m);
 
-            printInfoDBSCAN(DBSCAN.fit(m.toArray(), 2, 2000));
+            var dbscan = DBSCAN.fit(m.toArray(), 1, 0.0611);
+
+            printVerboseHuman(dbscan);
         } catch (IOException e) {
             e.printStackTrace();
         }
