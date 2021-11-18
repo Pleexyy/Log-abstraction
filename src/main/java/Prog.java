@@ -9,11 +9,11 @@ import smile.math.matrix.Matrix;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Prog {
 
-    private static final double facteurAttenuation = 0.8;
+    private static final double facteurAttenuation = 0.7;
+    private static final int incrementValue = 20;
     private static ConversationSet convSet;
 
     public static void main(String[] args) {
@@ -28,9 +28,9 @@ public class Prog {
             for (var x : sessionsAbstracts) {
                 System.out.println("types: " + x.getTypage() + " refs:" + x.getRefs().size());
             }
-            Matrix m = MatriceDistanceFactory.createMatrixDistance(sessionsAbstracts, 7, 20, facteurAttenuation);
+            Matrix m = MatriceDistanceFactory.createMatrixDistance(sessionsAbstracts, 7, incrementValue, facteurAttenuation);
             System.out.println("\n" + m);
-            var dbscan = DBSCAN.fit(m.toArray(), 1, 20);
+            var dbscan = DBSCAN.fit(m.toArray(), 1, 0.0611);
 
             printVerboseHuman(dbscan);
         } catch (IOException e) {
@@ -42,20 +42,33 @@ public class Prog {
      * @param dbscan type double
      */
     private static void printVerboseHuman(DBSCAN<double[]> dbscan) {
-        System.out.println("Nombre de cluster(s) pour un facteur d'atténuation de " + facteurAttenuation + " : " + dbscan.k);
-
-        int nbNoise = dbscan.size[dbscan.size.length - 1];
-        System.out.println("Il y a " + nbNoise + " événement(s) abstrait(s) qui est/sont considéré(s) comme du bruit");
-        List<String> abstratEventNoise = new ArrayList<>();
+        ArrayList<String>[] abstractEventClustered = new ArrayList[dbscan.k];
+        for (int i = 0; i < abstractEventClustered.length; i++) {
+            abstractEventClustered[i] = new ArrayList<>();
+        }
+        // List<String> abstractEventNoise = new ArrayList<>();
 
         for (int i = 0; i < dbscan.y.length; i++) {
-            // si un label correspond à du bruit, on l'ajoute à la liste
-            if (dbscan.y[i] == PartitionClustering.OUTLIER) {
-                abstratEventNoise.add(MatriceDistanceFactory.getListeLabel().get(i));
+            String strEvtAbs = MatriceDistanceFactory.getListeLabel().get(i);
+            int clusterLabel = dbscan.y[i];
+            if (clusterLabel == PartitionClustering.OUTLIER) {
+                // si un label correspond à du bruit, on l'ajoute à la liste
+                // abstractEventNoise.add(strEvtAbs);
+            } else {
+                // sinon on l'ajoute dans sa liste d'événement clusterisé
+                abstractEventClustered[clusterLabel].add(strEvtAbs);
             }
         }
+        System.out.println("Il y a " + dbscan.k + " cluster(s) :");
 
-        System.out.println("Il s'agit de : " + abstratEventNoise);
+        for (int i = 0; i < abstractEventClustered.length; i++) {
+            System.out.println("cluster n°"+i);
+            System.out.println("\t"+abstractEventClustered[i]);
+        }
+
+        int nbNoise = dbscan.size[dbscan.size.length - 1];
+        System.out.println("\nIl y a " + nbNoise + " événement(s) abstrait(s) qui est/sont considéré(s) comme du bruit");
+        // System.out.println("Il s'agit de : " + abstractEventNoise);
     }
 
 }
