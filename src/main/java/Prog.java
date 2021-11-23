@@ -18,19 +18,19 @@ public class Prog {
 
     public static void main(String[] args) {
         try {
-            var res = Prog.class.getResource("/data/sessionsDifferentes.txt");
+            var res = Prog.class.getResource("data/ConversationSet5.txt");
             if (res != null) {
                 convSet = new LogParser().parseFile(new File(res.getFile()));
             } else {
                 throw new IOException("L'URL de la ressource est null");
             }
             var sessionsAbstracts = new AbstacteurSession().abstracteur(convSet);
-            for (var x : sessionsAbstracts) {
-                System.out.println("types: " + x.getTypage() + " refs:" + x.getRefs().size());
+            for (var s : sessionsAbstracts) {
+                System.out.println(s.getTypage() + " refs:" + s.getRefs().size() + '\n');
             }
             Matrix m = MatriceDistanceFactory.createMatrixDistance(sessionsAbstracts, 7, incrementValue, facteurAttenuation);
             System.out.println("\n" + m);
-            var dbscan = DBSCAN.fit(m.toArray(), 1, 0.0611);
+            var dbscan = DBSCAN.fit(m.toArray(), 1, 0.059);
 
             printVerboseHuman(dbscan);
         } catch (IOException e) {

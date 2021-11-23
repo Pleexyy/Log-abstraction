@@ -52,7 +52,7 @@ public class MatriceDistanceFactory {
                             continue;
                         // on obtient la distance
                         double distanceValue = m.get(rowIndex, columnIndex) + incrementValue * Math.pow(facteurAttenuation, j);
-
+                        distanceValue *= sabs.getRefs().size();
                         // notion de symétrie
                         m.set(rowIndex, columnIndex, distanceValue);
                         m.set(columnIndex, rowIndex, distanceValue);
