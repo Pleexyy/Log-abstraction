@@ -9,10 +9,10 @@ Implémentation d'un algorithme d’abstraction de séquences d’évènements d
 
 ## Installation et exécution du programme
 
-### Méthode simplifiée
+### Méthode 1
 Avec IntelliJ IDEA, ouvrez le projet puis créer une configuration de type application avec comme classe "Main" : Prog.java
 
-### Méthode non testée
+### Méthode 2
 
 Pré-requis : avoir maven d'installé
 
