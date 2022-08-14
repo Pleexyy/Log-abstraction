@@ -4,11 +4,30 @@ Implémentation d'un algorithme d’abstraction de séquences d’évènements d
 
 ## Contenu
 
-* src/ contient le code source.
+* le dossier src/main/java/ contient le code source.
+* le dossier src/main/resources/data/ contient les ressources pour les tests.
 
-## Utilisation
+## Installation et exécution du programme
 
-Vous pouvez compiler le programme en exécutant le script **build.sh**.
+### Méthode simplifiée
+Avec IntelliJ IDEA, ouvrez le projet puis créer une configuration de type application avec comme classe "Main" : Prog.java
+
+### Méthode non testée
+
+Pré-requis : avoir maven d'installé
+
+Dans le dossier racine du projet, lancez la commande :
+```sh
+mvn install
+```
+
+```sh
+sh build.sh
+```
+
+```sh
+sh run.sh
+```
 
 ## Auteurs
 
